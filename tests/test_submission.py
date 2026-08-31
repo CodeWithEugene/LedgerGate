@@ -177,6 +177,59 @@ def test_every_cli_subcommand_the_docs_promise_actually_exists():
     assert not missing, f"documented CLI subcommands that do not exist: {missing}"
 
 
+def test_every_tool_the_agent_is_offered_is_actually_exercised():
+    """A declared tool that nothing ever calls is an untested claim.
+
+    This caught a real gap. `compute` and `procedure` were in the tool surface
+    and described at length in the README -- "arithmetic is a tool call so it
+    lands in the trajectory", "the agent works to a written procedure" -- and
+    no published policy called either. Both existed for the model-driven arm,
+    which is not published, so the two most rhetorically load-bearing tools
+    were the two with zero evidence behind them.
+
+    Asserted against the committed trajectories rather than the source, so it
+    measures what the published runs did, not what a policy could do.
+    """
+    from ledgergate.tools import TOOL_SPECS
+
+    traces = sorted((REPO_ROOT / "traces").glob("*.holdout.jsonl"))
+    if not traces:
+        pytest.skip("no trajectories yet; run 'make verify'")
+
+    called: set[str] = set()
+    for path in traces:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            record = json.loads(line)
+            if record.get("record") != "episode":
+                continue
+            called.update(step["tool"] for step in record.get("steps", []) if "tool" in step)
+
+    never = sorted({spec.name for spec in TOOL_SPECS} - called)
+    assert not never, (
+        f"tools offered to the agent that no published run ever calls: {never}. "
+        "Either a policy should use them or they should not be in the surface."
+    )
+
+
+def test_the_container_sees_everything_the_test_suite_reads():
+    """The clean-room image must not run a weaker suite than the author does.
+
+    `traces/` was missing from the image, so the test above skipped in the
+    container and passed locally -- and a skip prints as success in the summary
+    line most people read. The container is the environment a reviewer trusts,
+    so it is the one that must not be quietly degraded.
+    """
+    dockerfile = (REPO_ROOT / "Dockerfile").read_text(encoding="utf-8")
+    copied = set(re.findall(r"^COPY\s+([^\s]+)/\s", dockerfile, re.MULTILINE))
+
+    required = {"src", "tests", "data", "docs", "results", "traces", "cassettes", "scripts"}
+    missing = sorted(d for d in required if d not in copied and (REPO_ROOT / d).is_dir())
+    assert not missing, (
+        f"the Dockerfile does not COPY {missing}, so tests reading them skip in the "
+        "container while passing locally"
+    )
+
+
 def test_the_committed_corpus_is_present_and_hashed():
     for split in ("dev", "holdout"):
         directory = REPO_ROOT / "data" / split

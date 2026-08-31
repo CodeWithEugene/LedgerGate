@@ -4,9 +4,17 @@
 #   docker run --rm ledgergate:verify
 #
 # The default command runs the whole offline gate: corpus hash audit, the test
-# suite, the baseline evaluation, the advanced evaluation and the comparison
-# table. It needs no network access at run time and no API key: the
-# language-model runs replay from the cassettes committed in /app/cassettes.
+# suite, the baseline and advanced evaluations, the comparison table, and the
+# gate audit. It needs no network access at run time and no API key -- every
+# policy it exercises is deterministic.
+#
+#   docker run --rm --network none ledgergate:verify
+#
+# The image must contain everything the repository does that a test reads, or
+# the container quietly runs a weaker suite than the author does. That already
+# happened once: `traces/` was not copied, so the test asserting every declared
+# tool is actually exercised skipped here and passed locally. A skip is not a
+# pass, and the container is the environment a reviewer trusts.
 
 FROM python:3.11-slim-bookworm
 
@@ -31,6 +39,7 @@ COPY data/ ./data/
 COPY docs/ ./docs/
 COPY cassettes/ ./cassettes/
 COPY results/ ./results/
+COPY traces/ ./traces/
 COPY scripts/ ./scripts/
 
 # Run as an unprivileged user: nothing in the verification path needs root.

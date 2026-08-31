@@ -7,7 +7,7 @@
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
       "steps_used": 87,
-      "wall_seconds": 0.007
+      "wall_seconds": 0.01
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -577,7 +577,7 @@
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
       "steps_used": 432,
-      "wall_seconds": 0.024
+      "wall_seconds": 0.03
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -878,7 +878,7 @@
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
       "steps_used": 162,
-      "wall_seconds": 0.016
+      "wall_seconds": 0.017
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -1327,7 +1327,7 @@
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
       "steps_used": 490,
-      "wall_seconds": 0.09
+      "wall_seconds": 0.057
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -1595,8 +1595,8 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 282,
-      "wall_seconds": 0.032
+      "steps_used": 357,
+      "wall_seconds": 0.029
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -1850,8 +1850,8 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 324,
-      "wall_seconds": 0.019
+      "steps_used": 399,
+      "wall_seconds": 0.022
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,

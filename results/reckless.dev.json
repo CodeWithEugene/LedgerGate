@@ -6,7 +6,7 @@
     "llm_input_tokens": 0,
     "llm_output_tokens": 0,
     "steps_used": 87,
-    "wall_seconds": 0.007
+    "wall_seconds": 0.01
   },
   "cost_model": {
     "CORRECT_ABSTAIN": 15,

@@ -67,20 +67,37 @@ Point at, in order: **net value −57985**, **false pays: 24**, and the
 make trace-sample
 ```
 
-Scroll through **one complete episode** without cutting away. Call out in order:
+This prints the advanced solution on `HLD-PAY0015`. Scroll through the **whole
+episode** without cutting away. Call out in order:
 
-1. **The agent instructions** in the header — exactly what it was told.
-2. **`procedure("identification")`** — the written SOP it works to.
-3. **`resolve_vendor`** → two candidates, similarity scores close together.
-4. **`find_invoice_by_number`** → the reference resolves.
-5. **`compute`** — *"arithmetic is a tool call. It never does money maths in
-   its head, so every calculation is in the record where you can check it."*
-6. **`procedure("gaps")`** — AP-07.9. *"The procedure admits what it doesn't
-   cover — cross-currency, overpayments, reversals, predated receipts — and it
-   ends with 'do not infer a rule.' That's the interesting part. Real
-   procedures have holes."*
-7. **The gate verdict** — the veto, its reason code, and the clause it cites.
-8. **The decision** — and either the posting or the analyst queue.
+1. **The agent instructions** in the header — exactly what it was told,
+   including that the gate may withhold but never alter.
+2. **`procedure("identification")`** — *"it fetches the written SOP rather than
+   citing it from memory, so every clause in the rationale traces to something
+   in the record."*
+3. **`resolve_vendor`** → `EVERLINE TEXTILES` resolves cleanly at 1.0.
+4. **`find_invoice_by_number`** → the reference resolves to `HLD-INV0046`, same
+   supplier, exact amount. *"Every signal agrees. This is a receipt the
+   procedure says to pay, and the proposer proposes exactly that."*
+5. **`fx_rate("EUR","USD")`** → `UNAVAILABLE`. *"But the gate checks something
+   the proposer never looked at. The receipt is in euros and the invoice is in
+   dollars. There's no rate source configured, so any converted number would be
+   invented."*
+6. **The gate verdict** — `WITHHELD`, `CURRENCY_MISMATCH`, citing AP-07.9(i).
+7. **The decision** — `ABSTAIN`, nothing posted, analyst queue. *"The procedure
+   said pay. AP-07.9 says this is a case the procedure doesn't cover. The gate
+   is what knows the difference."*
+
+Then show arithmetic in the record, briefly:
+
+```bash
+python3 scripts/show_trace.py traces/guarded.holdout.jsonl HLD-PAY0004
+```
+
+> "One more thing worth seeing. This receipt is short by a correspondent bank
+> fee, and there's the subtraction — `2940195 - 2937673` — as a tool call, with
+> its operands, in the trajectory. Arithmetic is never done in the agent's
+> head. Integer cents throughout; the compute tool rejects a float outright."
 
 Then the human checkpoint:
 

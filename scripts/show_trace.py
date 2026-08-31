@@ -19,14 +19,16 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 TRACE_ROOT = REPO_ROOT / "traces"
 
-#: Searched in order when no file is named. A trajectory in which the gate
-#: overruled the proposer teaches more than one in which it had nothing to do,
-#: so a run with a fallible proposer is preferred over the tidy one.
+#: Searched in order when no file is named. The advanced solution comes first
+#: because that is what a reviewer is here to see, and it earns the slot: it
+#: vetoes six receipts on AP-07.9 grounds, so the default view still shows the
+#: gate overruling a proposer rather than a run where nothing happened. The
+#: weaker proposers follow as fallbacks.
 DEFAULT_TRACE_ORDER = (
-    "baseline+gate.holdout.jsonl",
-    "llm-gated.holdout.jsonl",
-    "reckless+gate.holdout.jsonl",
     "guarded.holdout.jsonl",
+    "llm-gated.holdout.jsonl",
+    "baseline+gate.holdout.jsonl",
+    "reckless+gate.holdout.jsonl",
 )
 
 WIDTH = 78

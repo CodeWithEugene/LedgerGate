@@ -36,8 +36,16 @@ def _abstain(payment: Payment, code: str, why: str, ev: Evidence | None = None) 
     )
 
 
-def propose(payment: Payment, ev: Evidence) -> Decision:
-    """Apply AP-07's identification rules to an evidence bundle."""
+def propose(payment: Payment, ev: Evidence, session: ToolSession | None = None) -> Decision:
+    """Apply AP-07's identification rules to an evidence bundle.
+
+    ``session`` is optional so the rules stay unit-testable in isolation, but
+    the shipped policy always passes one. When it is present, the shortfall is
+    computed through the ``compute`` tool rather than in Python, so the number
+    the decision turns on appears in the trajectory where a reviewer can check
+    it. That is a claim this project makes about agents generally, and it would
+    be hollow if the shipped policy exempted itself from it.
+    """
     if payment.amount_cents <= 0:
         return _abstain(
             payment, "NON_POSITIVE_RECEIPT",
@@ -85,7 +93,7 @@ def propose(payment: Payment, ev: Evidence) -> Decision:
         if len(open_refs) == 1:
             inv = open_refs[0]
             outstanding = int(inv["outstanding_cents"])
-            shortfall = outstanding - payment.amount_cents
+            shortfall = _shortfall(outstanding, payment.amount_cents, session)
 
             if shortfall < 0:
                 return _abstain(
@@ -158,6 +166,19 @@ def propose(payment: Payment, ev: Evidence) -> Decision:
     )
 
 
+def _shortfall(outstanding: int, received: int, session: ToolSession | None) -> int:
+    """The gap the whole part-payment branch turns on, computed in the open.
+
+    ``safe_compute`` works in integer cents and rejects float literals, so the
+    answer is identical to doing it in Python -- the point is not accuracy, it
+    is that the subtraction is in the record with its operands.
+    """
+    if session is None:
+        return outstanding - received
+    result = session.call("compute", {"expression": f"{outstanding} - {received}"})
+    return int(result["result"])
+
+
 def _match_single(
     payment: Payment, view: dict[str, Any], code: str, why: str, ev: Evidence
 ) -> Decision:
@@ -203,8 +224,15 @@ class GuardedPolicy:
         )
 
     def decide(self, payment: Payment, session: ToolSession) -> Decision:
+        # Read the procedure through the tool before acting on it. A rules
+        # engine does not strictly need to -- the rules are already compiled
+        # into this file -- but a trajectory that cites AP-07 without ever
+        # fetching it is asking the reader to take the citation on trust, and
+        # this project's entire argument is that they should not have to.
+        session.call("procedure", {"section": "identification"})
+
         ev = evidence_mod.gather(payment, session)
-        proposal = propose(payment, ev)
+        proposal = propose(payment, ev, session)
         if not self.use_gate:
             return proposal
         return safety.review_and_record(payment, proposal, ev, session, self.stats)

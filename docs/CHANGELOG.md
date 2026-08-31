@@ -414,7 +414,61 @@ of it as the gate refusing good answers, because none of it is.
 
 ---
 
-## 14. What I know is still wrong
+## 14. Iteration: two tools were in the surface, in the README, and called by nothing
+
+**Evidence.** Counting tool calls across every committed trajectory:
+
+```
+  check_duplicate_feed     240      compute                    0
+  find_invoice_by_number   192      procedure                  0
+  resolve_vendor           354      search_invoices          840
+```
+
+**Diagnosis.** `compute` and `procedure` were declared in the agent's tool
+surface and are the two tools the README leans on hardest — "arithmetic is a
+tool call, so every calculation is in the record where you can check it", and
+the whole framing of an agent working to a deliberately incomplete written
+procedure. Both existed for the model-driven arm. With that arm unpublished
+(§9), the two most rhetorically load-bearing tools had zero evidence behind
+them, while a reviewer reading the README would reasonably assume otherwise.
+
+The deterministic proposer had the rules compiled into it, so it never needed
+to fetch AP-07, and it did its one subtraction in Python.
+
+**Change.** Made the shipped policy actually use them: `GuardedPolicy.decide`
+opens by calling `procedure("identification")`, and the part-payment branch
+computes its shortfall through `compute` rather than in Python. Not decoration
+— the shortfall is the number the entire bank-charge-versus-unexplained-gap
+decision turns on, and it now appears in the trajectory with its operands.
+Every scorecard is unchanged to the cent, which is the point: the routing
+altered what is *visible*, not what is decided.
+
+Added `test_every_tool_the_agent_is_offered_is_actually_exercised`, which
+counts tool calls in the committed trajectories and fails on any declared tool
+that no published run touches.
+
+**Why this is here.** Nothing was broken and no test could have failed: an
+unused tool is valid code with a valid schema and an accurate description. It
+was only visible by asking a question nobody had asked — *does the published
+evidence actually support each sentence in the README?* — and the answer, for
+two sentences, was no. That is the same failure mode as §12, and it is now
+three entries in this log where the defect was a true statement placed next to
+a claim it did not support.
+
+**Coda: the new test skipped in the container and I nearly missed it.** The
+clean-room image did not copy `traces/`, so the tool-coverage test found no
+trajectories and skipped — while passing locally. The container reported
+`139 passed, 8 skipped`, the laptop `140 passed, 7 skipped`, and both end in
+the same green `OK` banner. A skip renders as success to anyone reading the
+summary line, which means the environment a reviewer trusts most was running
+the weaker suite. Fixed by copying `traces/` into the image, and
+`test_the_container_sees_everything_the_test_suite_reads` now compares the
+Dockerfile's `COPY` directives against the directories the suite reads. Both
+environments now report **141 passed, 7 skipped**, identically.
+
+---
+
+## 15. What I know is still wrong
 
 - **The holdout is a reseed, not a distribution shift.** It differs in
   identifiers, names, amounts and dates, but it is drawn from the same
@@ -430,8 +484,19 @@ of it as the gate refusing good answers, because none of it is.
 - **Sixty receipts per split.** Zero false pays is consistent with a true rate
   up to roughly 5% at 95% confidence. The honest phrasing is *"none observed
   under these conditions"*, not *"safe"*.
-- **Coverage is low, by design and in absolute terms.** 45% automation on a
-  corpus far more hazardous than a real feed. On a realistic mix the figure
-  would be much higher, but I have not measured that and will not claim it.
+- **Coverage is low, by design and in absolute terms.** 45% decided without an
+  analyst, on a corpus far more hazardous than a real feed — and only 30%
+  posted with no human at all once the approval threshold is applied (§12). On
+  a realistic mix both figures would be much higher, but I have not measured
+  that and will not claim it.
+- **Three of the last four entries in this log are the same failure.** §12,
+  §13 and §14 were all cases where every number was correct and the sentence
+  next to it was not: a metric named after something it did not measure, a
+  bucket label contradicted by the clause printed under it, a README claim with
+  no run behind it. None could fail a test at the time. Each was found by
+  reading two outputs side by side and noticing they disagreed. I have added
+  checks for the specific instances, and I have no process that would reliably
+  catch the next one — which is the honest state of it, and the same asymmetry
+  [`AGENTS.md`](AGENTS.md) records about supervising a coding agent.
 - **The gate encodes AP-07.9, and AP-07.9 is mine.** A different AP function
   has different rules. The architecture transfers; the specific vetoes do not.

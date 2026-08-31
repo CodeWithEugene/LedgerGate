@@ -878,7 +878,7 @@
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
       "steps_used": 162,
-      "wall_seconds": 0.016
+      "wall_seconds": 0.015
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -1579,8 +1579,8 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 282,
-      "wall_seconds": 0.019
+      "steps_used": 357,
+      "wall_seconds": 0.02
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -1834,8 +1834,8 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 324,
-      "wall_seconds": 0.019
+      "steps_used": 399,
+      "wall_seconds": 0.02
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
