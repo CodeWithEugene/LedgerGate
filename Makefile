@@ -83,7 +83,7 @@ approve: ## show the human approval queue the advanced solution produced
 	$(PY) -m ledgergate.cli approve --policy guarded $(HOLDOUT)
 
 demo: ## walk the video beats in order, one keypress apart (see docs/VIDEO_SCRIPT.md)
-	PYTHON=$(PY) sh scripts/demo.sh
+	PYTHON=$(VPY) sh scripts/demo.sh
 
 trace-sample: ## print one full agent trajectory, readable end to end
 	$(PY) scripts/show_trace.py

@@ -20,11 +20,20 @@ cd "$(dirname "$0")/.."
 
 PAUSE=${DEMO_PAUSE:-1}
 
+# `clear` exits non-zero when TERM is unset or unknown, and under `set -e` that
+# killed the whole script before it printed anything -- an "Error 1" and no
+# banner, which is a miserable thing to hit while a recording is running. Fall
+# back to the ANSI home-and-erase sequence, which every terminal worth
+# recording in understands.
+screen_clear() {
+    clear 2>/dev/null || printf '\033[H\033[2J'
+}
+
 beat() {
     if [ "$PAUSE" = "1" ]; then
         printf '\n\033[2m  [%s] press return\033[0m' "$1"
         read -r _ < /dev/tty || true
-        clear
+        screen_clear
     fi
     echo
     echo "=============================================================="
@@ -34,7 +43,7 @@ beat() {
 }
 
 if [ "$PAUSE" = "1" ]; then
-    clear
+    screen_clear
     cat <<'BANNER'
 
     LedgerGate -- demo
