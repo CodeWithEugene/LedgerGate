@@ -40,7 +40,10 @@ const TOOL_ICON: Record<string, React.ElementType> = {
  * but the blob stays one click away, because the moment the summary and the
  * record disagree, the record is what matters.
  */
-function summarise(step: Extract<Step, { kind: "tool" }>): string {
+function summarise(
+  step: Extract<Step, { kind: "tool" }>,
+  currency: string,
+): string {
   const args = step.arguments as Record<string, string | number>;
   const obs = step.observation as Record<string, unknown> | null;
 
@@ -68,7 +71,7 @@ function summarise(step: Extract<Step, { kind: "tool" }>): string {
       const found = (obs?.invoices as unknown[]) ?? [];
       const scope =
         args.amount_cents !== undefined
-          ? `for ${money(Number(args.amount_cents))}`
+          ? `for ${money(Number(args.amount_cents), currency)}`
           : args.vendor_id
             ? `for ${args.vendor_id}`
             : "";
@@ -77,7 +80,9 @@ function summarise(step: Extract<Step, { kind: "tool" }>): string {
     case "get_invoice":
       return `Pulled the full record for ${args.invoice_id}`;
     case "fx_rate":
-      return `Asked for a ${args.from ?? "?"}→${args.to ?? "?"} rate`;
+      return obs?.status === "UNAVAILABLE"
+        ? `Asked for a ${args.base}→${args.quote} rate — none is configured`
+        : `Asked for a ${args.base}→${args.quote} rate`;
     case "compute":
       return `Computed ${args.expression}`;
     default:
@@ -85,7 +90,7 @@ function summarise(step: Extract<Step, { kind: "tool" }>): string {
   }
 }
 
-function ToolStep({ step }: { step: Extract<Step, { kind: "tool" }> }) {
+function ToolStep({ step, currency }: { step: Extract<Step, { kind: "tool" }>; currency: string }) {
   const [open, setOpen] = useState(false);
   const Icon = TOOL_ICON[step.tool] ?? ListChecks;
 
@@ -96,7 +101,7 @@ function ToolStep({ step }: { step: Extract<Step, { kind: "tool" }> }) {
       </span>
       <div className="pb-5">
         <div className="flex flex-wrap items-baseline gap-2">
-          <p className="text-sm">{summarise(step)}</p>
+          <p className="text-sm">{summarise(step, currency)}</p>
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
@@ -122,7 +127,7 @@ function ToolStep({ step }: { step: Extract<Step, { kind: "tool" }> }) {
   );
 }
 
-function GateStep({ step }: { step: Extract<Step, { kind: "gate" }> }) {
+function GateStep({ step, currency }: { step: Extract<Step, { kind: "gate" }>; currency: string }) {
   const withheld = step.verdict === "WITHHELD";
   return (
     <li className="relative pl-10">
@@ -159,7 +164,7 @@ function GateStep({ step }: { step: Extract<Step, { kind: "gate" }> }) {
           <p className="mt-1 text-sm text-muted-foreground">
             The agent proposed{" "}
             {step.proposed
-              .map((a) => `${money(a.amount_cents)} to ${a.invoice_id}`)
+              .map((a) => `${money(a.amount_cents, currency)} to ${a.invoice_id}`)
               .join(", ")}
             {withheld ? ". The gate refused it." : "."}
           </p>
@@ -175,7 +180,7 @@ function GateStep({ step }: { step: Extract<Step, { kind: "gate" }> }) {
   );
 }
 
-export function Investigation({ steps }: { steps: Step[] }) {
+export function Investigation({ steps, currency }: { steps: Step[]; currency: string }) {
   if (steps.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
@@ -190,9 +195,9 @@ export function Investigation({ steps }: { steps: Step[] }) {
       <span className="absolute bottom-2 left-[13px] top-2 w-px bg-border" />
       {steps.map((step) => {
         if (step.kind === "tool")
-          return <ToolStep key={step.index} step={step} />;
+          return <ToolStep key={step.index} step={step} currency={currency} />;
         if (step.kind === "gate")
-          return <GateStep key={step.index} step={step} />;
+          return <GateStep key={step.index} step={step} currency={currency} />;
         return null;
       })}
     </ol>

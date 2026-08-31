@@ -67,13 +67,19 @@ export const STATUS_STYLE: Record<ReceiptStatus, string> = {
     "bg-neutral-100 text-neutral-600 border-neutral-200 dark:bg-neutral-900 dark:text-neutral-400 dark:border-neutral-800",
 };
 
-/** `CURRENCY_MISMATCH (AP-07.9(i)): receipt is EUR...` -> its parts. */
+/**
+ * `CURRENCY_MISMATCH (AP-07.9(i)): receipt is EUR...` -> its parts.
+ *
+ * The citation group is greedy on purpose: sub-clauses are themselves
+ * parenthesised, so a lazy match stops inside `AP-07.9(i)` and drops the
+ * clause the analyst most needs to see.
+ */
 export function parseVeto(text: string): {
   code: string;
   citation: string | null;
   detail: string;
 } {
-  const match = /^([A-Z_]+)\s*\(([^)]+)\):\s*(.*)$/s.exec(text);
+  const match = /^([A-Z_]+)\s*\((.+)\):\s*([\s\S]*)$/.exec(text);
   if (!match) return { code: "VETO", citation: null, detail: text };
   return { code: match[1], citation: match[2], detail: match[3] };
 }
