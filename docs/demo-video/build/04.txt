@@ -1,1 +1,0 @@
-Reckless. It posts against the first invoice it finds. Twenty-three posted. Zero gate interventions. Coverage looks great because it never stops. This is an agent you would never put in production — and the output looks just as confident as a correct posting.

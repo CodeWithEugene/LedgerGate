@@ -15,6 +15,9 @@ web/out/
 web/next-env.d.ts
 web/.turbo/
 
+# Demo video stills, voiceover, and rendered MP4.
+docs/demo-video/
+
 # Credentials must never enter the repository.
 .env
 *.key

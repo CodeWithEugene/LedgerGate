@@ -1,1 +1,0 @@
-We did not build an agent that never gets cash application wrong. We built one that is allowed to be wrong, and a gate that can only say no — then we measured what that safety is worth in money.
