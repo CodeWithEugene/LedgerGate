@@ -26,19 +26,24 @@ export function useEngine<T>(
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    fetcher()
-      .then((result) => {
+
+    const load = async () => {
+      setLoading(true);
+      try {
+        const result = await fetcher();
         if (cancelled) return;
         setData(result);
         setError(null);
-      })
-      .catch((err: Error) => {
+      } catch (err) {
         if (cancelled) return;
-        setError(err);
+        setError(err as Error);
         setData(null);
-      })
-      .finally(() => !cancelled && setLoading(false));
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    void load();
     return () => {
       cancelled = true;
     };

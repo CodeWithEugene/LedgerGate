@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { VetoCallout } from "@/components/shared";
 import { humanTool, money } from "@/lib/format";
 import type { Step } from "@/lib/types";
