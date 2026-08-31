@@ -211,6 +211,43 @@ def test_every_tool_the_agent_is_offered_is_actually_exercised():
     )
 
 
+@pytest.mark.skipif(
+    not (REPO_ROOT / "traces" / "guarded.holdout.jsonl").exists(),
+    reason="trajectories not generated yet; run 'make verify'",
+)
+@pytest.mark.parametrize("policy", ["guarded", "rules-only", "baseline"])
+def test_rerunning_a_policy_reproduces_its_committed_trajectory_byte_for_byte(policy, tmp_path):
+    """`make verify` must leave a clean working tree, not just equal numbers.
+
+    A reviewer who reproduces the results and then sees `git status` list nine
+    modified files has to go and diff them to find out whether anything real
+    moved. Ours moved only in `wall_seconds`, which is a property of the
+    machine rather than the policy -- so it is no longer written to any
+    committed artifact, and this test holds the line at byte equality rather
+    than at "equal apart from the fields we decided not to look at".
+    """
+    from ledgergate.cli import _make_policy
+    from ledgergate.runtime import run_policy
+    from ledgergate.store import load_corpus
+
+    from conftest import DATA_ROOT
+
+    committed = (REPO_ROOT / "traces" / f"{policy}.holdout.jsonl").read_text(encoding="utf-8")
+    fresh_path = tmp_path / "fresh.jsonl"
+    run_policy(
+        _make_policy(policy),
+        load_corpus(DATA_ROOT, "holdout"),
+        trajectory_path=fresh_path,
+        max_steps_per_payment=40,
+    )
+
+    assert fresh_path.read_text(encoding="utf-8") == committed, (
+        f"re-running {policy} produced a different trajectory than the committed one; "
+        "either the policy is not deterministic or the artifact is stale "
+        "(run 'make verify' and commit the result)"
+    )
+
+
 def test_the_container_sees_everything_the_test_suite_reads():
     """The clean-room image must not run a weaker suite than the author does.
 

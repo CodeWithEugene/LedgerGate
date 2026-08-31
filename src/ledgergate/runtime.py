@@ -196,18 +196,19 @@ def run_policy(
                     ),
                 })
 
-        wall = time.monotonic() - started
         finalise = getattr(policy, "finalise", None)
         if callable(finalise):
             finalise()
         stats = dict(getattr(policy, "stats", {}) or {})
 
         if handle is not None:
+            # No wall-clock time here either: a committed trajectory should be
+            # byte-identical on re-run, and timing is the one thing that never
+            # can be. Step count carries the same information reproducibly.
             _write(handle, {
                 "record": "summary",
                 "decisions": len(decisions),
                 "steps_used": total_steps,
-                "wall_seconds": round(wall, 3),
                 "ledger_blocks": dict(sorted(blocks.items())),
                 "queued_for_approval": queued,
                 "policy_errors": policy_errors,

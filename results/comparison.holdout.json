@@ -6,8 +6,7 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 87,
-      "wall_seconds": 0.007
+      "steps_used": 87
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -567,7 +566,7 @@
     },
     "policy": "reckless",
     "total_payments": 60,
-    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+    "verifier_sha256": "b33938c7b35e9dc36ab903f07c91fb9e1b0a3b23313370a5e9616e486bf117e5"
   },
   {
     "corpus": "holdout",
@@ -576,8 +575,7 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 432,
-      "wall_seconds": 0.023
+      "steps_used": 432
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -868,7 +866,7 @@
     },
     "policy": "reckless+gate",
     "total_payments": 60,
-    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+    "verifier_sha256": "b33938c7b35e9dc36ab903f07c91fb9e1b0a3b23313370a5e9616e486bf117e5"
   },
   {
     "corpus": "holdout",
@@ -877,8 +875,7 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 162,
-      "wall_seconds": 0.015
+      "steps_used": 162
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -1309,7 +1306,7 @@
     },
     "policy": "baseline",
     "total_payments": 60,
-    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+    "verifier_sha256": "b33938c7b35e9dc36ab903f07c91fb9e1b0a3b23313370a5e9616e486bf117e5"
   },
   {
     "corpus": "holdout",
@@ -1318,8 +1315,7 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 491,
-      "wall_seconds": 0.034
+      "steps_used": 491
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -1570,7 +1566,7 @@
     },
     "policy": "baseline+gate",
     "total_payments": 60,
-    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+    "verifier_sha256": "b33938c7b35e9dc36ab903f07c91fb9e1b0a3b23313370a5e9616e486bf117e5"
   },
   {
     "corpus": "holdout",
@@ -1579,8 +1575,7 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 357,
-      "wall_seconds": 0.02
+      "steps_used": 357
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -1825,7 +1820,7 @@
     },
     "policy": "rules-only",
     "total_payments": 60,
-    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+    "verifier_sha256": "b33938c7b35e9dc36ab903f07c91fb9e1b0a3b23313370a5e9616e486bf117e5"
   },
   {
     "corpus": "holdout",
@@ -1834,8 +1829,7 @@
       "llm_calls": 0,
       "llm_input_tokens": 0,
       "llm_output_tokens": 0,
-      "steps_used": 399,
-      "wall_seconds": 0.02
+      "steps_used": 399
     },
     "cost_model": {
       "CORRECT_ABSTAIN": 15,
@@ -2029,6 +2023,6 @@
     },
     "policy": "guarded",
     "total_payments": 60,
-    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+    "verifier_sha256": "b33938c7b35e9dc36ab903f07c91fb9e1b0a3b23313370a5e9616e486bf117e5"
   }
 ]

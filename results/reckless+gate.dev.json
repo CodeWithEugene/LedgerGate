@@ -5,8 +5,7 @@
     "llm_calls": 0,
     "llm_input_tokens": 0,
     "llm_output_tokens": 0,
-    "steps_used": 432,
-    "wall_seconds": 0.03
+    "steps_used": 432
   },
   "cost_model": {
     "CORRECT_ABSTAIN": 15,
@@ -343,5 +342,5 @@
   ],
   "total_payments": 60,
   "trajectory": "traces/reckless+gate.dev.jsonl",
-  "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+  "verifier_sha256": "b33938c7b35e9dc36ab903f07c91fb9e1b0a3b23313370a5e9616e486bf117e5"
 }

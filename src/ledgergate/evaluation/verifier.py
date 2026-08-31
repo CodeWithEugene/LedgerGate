@@ -214,9 +214,15 @@ class Scorecard:
             "per_hazard": self.per_hazard,
             "cost_model": self.cost_model,
             "ledger_blocks": self.ledger_blocks,
+            # Wall-clock time is deliberately absent. It is a property of the
+            # machine, not of the policy, and it was the only field that
+            # differed when a fresh clone re-ran `make verify` -- which left a
+            # reviewer with a dirty working tree and a reasonable doubt about
+            # what else had moved. It is still printed on every scorecard;
+            # it is simply not committed. Step count is the reproducible
+            # measure of effort and is right here.
             "cost": {
                 "steps_used": self.steps_used,
-                "wall_seconds": round(self.wall_seconds, 3),
                 "llm_calls": self.llm_calls,
                 "llm_input_tokens": self.llm_input_tokens,
                 "llm_output_tokens": self.llm_output_tokens,
