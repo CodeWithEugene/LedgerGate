@@ -55,7 +55,7 @@ not have to take "runs offline" on trust. The image is `python:3.11-slim`; the
 build is the only step that touches the network, and only to pull that base
 image and `pytest`.
 
-Expected: the corpus hash audit, 151 tests (144 run, 7 skipped), the baseline scorecard, the
+Expected: the corpus hash audit, 154 tests (147 run, 7 skipped), the baseline scorecard, the
 advanced scorecard, the headline comparison, and the gate audit, ending in
 
 ```
@@ -95,7 +95,7 @@ that can drift underneath a number printed in the README.
 | Step | Command | What it proves |
 |---|---|---|
 | 1 | `ledgergate audit` | The committed corpus matches its SHA-256 manifest, and all 9 ground-truth invariants re-derive from the data. If this fails, stop — everything downstream is meaningless. |
-| 2 | `pytest` | 151 tests (7 of them skip without cassettes), including the gate's soundness and sufficiency properties, the adversarial probes, and the submission-integrity checks. |
+| 2 | `pytest` | 154 tests (7 of them skip without cassettes), including the gate's soundness and sufficiency properties, the adversarial probes, and the submission-integrity checks. |
 | 3 | `ledgergate run --policy baseline --corpus holdout` | The baseline scorecard. |
 | 4 | `ledgergate run --policy guarded --corpus holdout` | The advanced scorecard. |
 | 5 | `ledgergate compare --corpus holdout --policies ...` | The comparison table published in the README, plus the cost-model sensitivity sweep. |
@@ -171,7 +171,7 @@ The properties that must hold on any machine:
 skip when `cassettes/` is empty, which it is in this submission. They cover the
 optional model-driven arm; see below. Nothing in the headline depends on them.
 
-The container and a local run report **the same** `144 passed, 7 skipped`. That
+The container and a local run report **the same** `147 passed, 7 skipped`. That
 is checked rather than assumed: a skip prints as success, so an image missing a
 directory the suite reads would silently verify less than the author does.
 `test_the_container_sees_everything_the_test_suite_reads` compares the

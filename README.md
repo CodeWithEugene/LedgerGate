@@ -306,7 +306,7 @@ directly. Full account in [`docs/CHANGELOG.md` §5](docs/CHANGELOG.md).
 | 3 | `make trace-sample` | one full agent trajectory as prose — tools, evidence, retries, gate verdict |
 | 2 | `make approve` | the human checkpoint: high-value postings queue and the system cannot release its own queue |
 | 4 | [`docs/CHANGELOG.md`](docs/CHANGELOG.md) §5, §8, §9 | the benchmark bug, the change that mattered most, the experiment I removed |
-| 3 | [`docs/CHANGELOG.md`](docs/CHANGELOG.md) §12–§14 | three places where every number was right and the sentence beside it was wrong — and why no test could have caught them |
+| 3 | [`docs/CHANGELOG.md`](docs/CHANGELOG.md) §12–§16 | five places where every number was right and the sentence beside it was wrong, ending with the tests that now check the prose |
 | 5 | [`docs/PROBLEM.md`](docs/PROBLEM.md) | the ambiguities in the domain and how each was resolved |
 | 2 | `tests/test_safety.py` | soundness and sufficiency, stated as properties |
 

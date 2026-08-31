@@ -552,7 +552,43 @@ have shown that. The general lesson from §12 to §14 arriving twice more:
 
 ---
 
-## 16. What I know is still wrong
+## 16. Iteration: the documentation's own numbers went stale three times
+
+**Evidence.** `docs/REPRODUCTION.md` tells a reviewer what output to expect,
+down to the test count. That count was wrong three separate times in this
+sprint — 141, then 144, then 146 — every time because adding a test is the one
+moment nobody is thinking about the documentation. The same happened to the
+`safety.py` line count and to the changelog's own section numbers, which four
+other files point into by number.
+
+**Why it is not cosmetic.** A reviewer who is told to expect `147 passed` and
+sees `152 passed` has no way to tell *the author added tests and forgot* from
+*tests are silently not running in my environment*. The second is precisely the
+failure the document exists to rule out, and it already happened once here in
+Docker (§15's coda: a skipped test rendering as a pass). Once a stated
+expectation is unreliable, it stops being a check and becomes noise.
+
+**Change.** Three claims that were prose are now assertions:
+
+| claim | test |
+|---|---|
+| the suite's size, and every per-file count quoted in any document | `test_the_test_count_the_docs_quote_is_the_real_one` |
+| every `§N` pointer between documents resolves to that section | `test_every_section_reference_between_documents_resolves` |
+| no committed artifact carries a machine-dependent value | `test_no_committed_artifact_carries_a_machine_dependent_value` |
+
+Each was checked by mutation rather than assumed to work: renumbering
+changelog §9 fails the suite in all four documents that cite it.
+
+**Why this is here.** The pattern across §11 to §16 is one thing, arriving six
+times. Every number in this repository was produced by running something.
+Every *sentence beside a number* was produced by me, and there was no
+mechanism that checked those, so they were the only part that could rot
+silently while the suite stayed green. Prose is the untested surface of a
+codebase. It is also, for a reviewer, most of the interface.
+
+---
+
+## 17. What I know is still wrong
 
 - **The holdout is a reseed, not a distribution shift.** It differs in
   identifiers, names, amounts and dates, but it is drawn from the same

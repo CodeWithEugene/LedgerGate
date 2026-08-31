@@ -211,6 +211,56 @@ def test_every_tool_the_agent_is_offered_is_actually_exercised():
     )
 
 
+def test_the_test_count_the_docs_quote_is_the_real_one():
+    """`docs/REPRODUCTION.md` tells a reviewer what output to expect.
+
+    That number has gone stale three times in this repository, each time
+    because adding a test is the one moment nobody is thinking about the
+    documentation. A reviewer who runs the suite and sees a different total
+    than the one they were promised has no way to tell "the author added tests
+    and forgot" from "tests are silently not running here" -- and the second is
+    exactly the failure this document exists to rule out.
+    """
+    proc = subprocess.run(
+        [sys.executable, "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider"],
+        cwd=REPO_ROOT, capture_output=True, text=True, timeout=300,
+    )
+    # Older pytest prints "N tests collected"; newer -q prints one
+    # "path/to/test_x.py: N" line per file and no total.
+    total = re.search(r"(\d+) tests? collected", proc.stdout)
+    per_file = re.findall(r"^\S+\.py: (\d+)$", proc.stdout, re.M)
+    if total:
+        actual = int(total.group(1))
+    elif per_file:
+        actual = sum(int(n) for n in per_file)
+    else:
+        pytest.fail(f"could not read a collection count from pytest:\n{proc.stdout[-2000:]}")
+
+    by_file = {name: int(n) for name, n in re.findall(r"^(\S+\.py): (\d+)$", proc.stdout, re.M)}
+
+    # A count is either about one test file named nearby ("19 tests in
+    # `tests/test_llm_policy.py`") or about the suite as a whole. Both drift.
+    claim = re.compile(r"(\d+) tests?\b(?![ a-z]*(?:collected|pass))")
+    wrong = []
+    for source in [REPO_ROOT / "README.md", *sorted((REPO_ROOT / "docs").glob("*.md"))]:
+        text = source.read_text(encoding="utf-8")
+        for m in claim.finditer(text):
+            quoted = int(m.group(1))
+            window = text[max(0, m.start() - 120): m.end() + 120]
+            named = re.search(r"tests/(test_\w+\.py)", window)
+            if named:
+                expected = by_file.get(f"tests/{named.group(1)}")
+                label = f"tests/{named.group(1)}"
+            else:
+                expected, label = actual, "the whole suite"
+            if expected is not None and quoted != expected:
+                wrong.append(
+                    f"{source.name}: claims {quoted} tests for {label}, which has {expected}"
+                )
+
+    assert not wrong, "stale test counts in the documentation:\n  " + "\n  ".join(wrong)
+
+
 def test_every_section_reference_between_documents_resolves():
     """`CHANGELOG.md §9` has to still be the section it was when I wrote it.
 
