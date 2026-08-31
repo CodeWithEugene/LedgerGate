@@ -1,0 +1,10 @@
+.venv
+.railway
+.vercel
+web
+tests
+docs
+cassettes
+results
+scripts
+.git

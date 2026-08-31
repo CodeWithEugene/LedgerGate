@@ -1,0 +1,1 @@
+The interface has no privileged path. Approve goes through the same ledger call as the command line. If you do not declare a human, it raises. That is not a convention in a document. It is a type error. The system cannot release its own queue.

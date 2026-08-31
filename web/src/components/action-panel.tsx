@@ -155,6 +155,21 @@ export function ApproveDialog({
   );
 }
 
+const DISPOSITIONS = [
+  {
+    value: "MATCHED" as const,
+    label: "Apply to an invoice I have identified",
+  },
+  {
+    value: "HELD" as const,
+    label: "Hold — waiting on the supplier",
+  },
+  {
+    value: "RETURNED" as const,
+    label: "Return the funds to the payer",
+  },
+];
+
 /**
  * Dispose of an escalated receipt.
  *
@@ -244,18 +259,16 @@ export function ResolveDialog({
               }
             >
               <SelectTrigger className="w-full">
-                <SelectValue />
+                <SelectValue>
+                  {DISPOSITIONS.find((item) => item.value === disposition)?.label}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="MATCHED">
-                  Apply to an invoice I have identified
-                </SelectItem>
-                <SelectItem value="HELD">
-                  Hold — waiting on the supplier
-                </SelectItem>
-                <SelectItem value="RETURNED">
-                  Return the funds to the payer
-                </SelectItem>
+                {DISPOSITIONS.map((item) => (
+                  <SelectItem key={item.value} value={item.value}>
+                    {item.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>

@@ -22,7 +22,7 @@ import type { Receipt } from "@/lib/types";
 
 export function ReceiptTable({ receipts }: { receipts: Receipt[] }) {
   return (
-    <div className="overflow-hidden rounded-lg border">
+    <div className="overflow-x-auto rounded-lg border">
       <Table>
         <TableHeader>
           <TableRow className="bg-muted/50">

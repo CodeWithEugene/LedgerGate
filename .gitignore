@@ -1,4 +1,6 @@
 .venv/
+.railway/
+.vercel/
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -17,3 +19,4 @@ web/.turbo/
 .env
 *.key
 secrets.*
+.vercel

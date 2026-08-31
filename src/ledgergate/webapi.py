@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import threading
 from dataclasses import dataclass
@@ -631,6 +632,37 @@ def _vetoes_for(session: Session, payment_id: str) -> list[str]:
 # ---------------------------------------------------------------------------
 
 
+def dispatch(method: str, path: str, body: dict | None = None) -> tuple[int, Any]:
+    """Route a request. Used by the local server and by the Vercel adapter."""
+    if method == "OPTIONS":
+        return 200, {}
+    parsed = urlparse(path)
+    query = parse_qs(parsed.query)
+    for verb, pattern, handler in ROUTES:
+        if verb != method:
+            continue
+        match = pattern.match(parsed.path)
+        if not match:
+            continue
+        try:
+            payload = (
+                handler(match, query, body) if method == "POST"
+                else handler(match, query)
+            )
+            return 200, payload
+        except PermissionError as exc:
+            return 403, {"error": str(exc)}
+        except KeyError as exc:
+            return 404, {"error": f"not found: {exc}"}
+        except (ValueError, LookupError) as exc:
+            return 400, {"error": str(exc)}
+        except json.JSONDecodeError:
+            return 400, {"error": "request body was not valid JSON"}
+        except Exception as exc:  # noqa: BLE001
+            return 500, {"error": f"{type(exc).__name__}: {exc}"}
+    return 404, {"error": f"no route for {method} {parsed.path}"}
+
+
 class APIHandler(BaseHTTPRequestHandler):
     server_version = "ledgergate-api/0.1"
 
@@ -639,8 +671,8 @@ class APIHandler(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
-        # The UI is served by Next.js on another port in development. This is a
-        # localhost-only tool over synthetic data; it is not an auth boundary.
+        # The UI is served by Next.js on another origin in production. This is a
+        # demo over synthetic data; it is not an auth boundary.
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
@@ -651,7 +683,8 @@ class APIHandler(BaseHTTPRequestHandler):
         self._send({})
 
     def do_GET(self):  # noqa: N802
-        self._dispatch("GET")
+        status, payload = dispatch("GET", self.path)
+        self._send(payload, status)
 
     def do_POST(self):  # noqa: N802
         length = int(self.headers.get("Content-Length") or 0)
@@ -661,33 +694,8 @@ class APIHandler(BaseHTTPRequestHandler):
         except json.JSONDecodeError:
             self._send({"error": "request body was not valid JSON"}, 400)
             return
-        self._dispatch("POST", body)
-
-    def _dispatch(self, method: str, body: dict | None = None) -> None:
-        parsed = urlparse(self.path)
-        query = parse_qs(parsed.query)
-        for verb, pattern, handler in ROUTES:
-            if verb != method:
-                continue
-            match = pattern.match(parsed.path)
-            if not match:
-                continue
-            try:
-                payload = (
-                    handler(match, query, body) if method == "POST"
-                    else handler(match, query)
-                )
-                self._send(payload)
-            except PermissionError as exc:
-                self._send({"error": str(exc)}, 403)
-            except KeyError as exc:
-                self._send({"error": f"not found: {exc}"}, 404)
-            except (ValueError, LookupError) as exc:
-                self._send({"error": str(exc)}, 400)
-            except Exception as exc:  # noqa: BLE001
-                self._send({"error": f"{type(exc).__name__}: {exc}"}, 500)
-            return
-        self._send({"error": f"no route for {method} {parsed.path}"}, 404)
+        status, payload = dispatch("POST", self.path, body)
+        self._send(payload, status)
 
     def log_message(self, fmt, *args):
         print(f"  {self.command:4s} {self.path}")
@@ -695,15 +703,19 @@ class APIHandler(BaseHTTPRequestHandler):
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--port", type=int, default=8787)
-    parser.add_argument("--host", default="127.0.0.1")
+    # Railway (and most hosts) inject PORT and expect 0.0.0.0. Local `make
+    # web-api` still binds loopback so the engine is not on the LAN by accident.
+    hosted = "PORT" in os.environ
+    parser.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8787")))
+    parser.add_argument("--host", default="0.0.0.0" if hosted else "127.0.0.1")
     parser.add_argument("--warm", action="store_true",
                         help="run every policy at startup instead of on first request")
     args = parser.parse_args()
 
-    if args.warm:
-        for policy in POLICIES:
-            get_session(DEFAULT_SPLIT, policy)
+    if args.warm or hosted:
+        for split in ("holdout", "dev"):
+            for policy in POLICIES:
+                get_session(split, policy)
 
     server = ThreadingHTTPServer((args.host, args.port), APIHandler)
     print(f"LedgerGate API on http://{args.host}:{args.port}")

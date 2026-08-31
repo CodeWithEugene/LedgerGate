@@ -1,0 +1,22 @@
+# Operator API for the Next.js interface. Separate from the verification
+# Dockerfile, which runs `make verify` and then exits.
+FROM python:3.11-slim-bookworm
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/src
+
+WORKDIR /app
+
+COPY pyproject.toml ./
+COPY src/ ./src/
+COPY data/ ./data/
+COPY traces/ ./traces/
+
+RUN useradd --create-home --uid 10001 app \
+ && chown -R app:app /app
+USER app
+
+EXPOSE 8080
+
+CMD ["sh", "-c", "python -m ledgergate.webapi --host 0.0.0.0 --port ${PORT:-8080} --warm"]

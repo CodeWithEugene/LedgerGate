@@ -5,6 +5,7 @@ import "./globals.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ScopeProvider } from "@/components/scope-provider";
 import { ScopeSwitcher } from "@/components/scope-switcher";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
@@ -61,26 +62,33 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <ScopeProvider>
-          <TooltipProvider delayDuration={200}>
-            <SidebarProvider>
-              <AppSidebar />
-              <SidebarInset>
-                <header className="sticky top-0 z-20 flex h-14 shrink-0 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur">
-                  <SidebarTrigger className="-ml-1" />
-                  <Separator orientation="vertical" className="mr-2 h-4" />
-                  <div className="flex-1" />
-                  <ScopeSwitcher />
-                </header>
-                <main className="flex-1 p-4 md:p-6">{children}</main>
-              </SidebarInset>
-            </SidebarProvider>
-            <Toaster position="bottom-right" richColors />
-          </TooltipProvider>
-        </ScopeProvider>
+        <ThemeProvider>
+          <ScopeProvider>
+            <TooltipProvider delayDuration={200}>
+              <SidebarProvider>
+                <AppSidebar />
+                <SidebarInset>
+                  <header className="sticky top-0 z-20 flex min-h-14 shrink-0 flex-wrap items-center gap-2 border-b bg-background/95 px-4 py-2 backdrop-blur">
+                    <SidebarTrigger className="-ml-1" />
+                    <Separator
+                      orientation="vertical"
+                      className="mr-2 hidden h-4 sm:block"
+                    />
+                    <div className="ml-auto">
+                      <ScopeSwitcher />
+                    </div>
+                  </header>
+                  <div className="flex-1 p-4 md:p-6">{children}</div>
+                </SidebarInset>
+              </SidebarProvider>
+              <Toaster position="bottom-right" richColors />
+            </TooltipProvider>
+          </ScopeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

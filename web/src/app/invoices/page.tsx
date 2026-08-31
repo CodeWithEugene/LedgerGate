@@ -83,7 +83,7 @@ export default function InvoicesPage() {
       ) : null}
 
       {invoices.length > 0 ? (
-        <div className="overflow-hidden rounded-lg border">
+        <div className="overflow-x-auto rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow className="bg-muted/50">

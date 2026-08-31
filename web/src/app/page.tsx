@@ -127,8 +127,9 @@ export default function InboxPage() {
       ) : null}
 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <Tabs value={status} onValueChange={setStatus}>
-          <TabsList>
+        <div className="min-w-0 max-w-full overflow-x-auto">
+          <Tabs value={status} onValueChange={setStatus}>
+            <TabsList>
             {TABS.map((tab) => (
               <TabsTrigger key={tab.value} value={tab.value}>
                 {tab.label}
@@ -140,7 +141,8 @@ export default function InboxPage() {
               </TabsTrigger>
             ))}
           </TabsList>
-        </Tabs>
+          </Tabs>
+        </div>
 
         <div className="relative w-full sm:w-72">
           <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -153,7 +155,9 @@ export default function InboxPage() {
         </div>
       </div>
 
-      {receipts.error ? <ErrorState error={receipts.error} /> : null}
+      {receipts.error && !overview.error ? (
+        <ErrorState error={receipts.error} />
+      ) : null}
       {receipts.loading && !receipts.data ? <LoadingRows /> : null}
 
       {receipts.data && receipts.data.receipts.length === 0 ? (

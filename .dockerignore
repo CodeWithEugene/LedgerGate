@@ -1,0 +1,9 @@
+.git
+.venv
+.railway
+.vercel
+web/node_modules
+web/.next
+**/__pycache__
+**/.DS_Store
+**/.pytest_cache

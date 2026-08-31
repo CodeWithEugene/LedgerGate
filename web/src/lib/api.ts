@@ -53,7 +53,10 @@ async function get<T>(path: string, params?: Record<string, string>): Promise<T>
   const query = params ? `?${new URLSearchParams(params)}` : "";
   let response: Response;
   try {
-    response = await fetch(`/api${path}${query}`, { cache: "no-store" });
+    response = await fetch(`/api${path}${query}`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(8_000),
+    });
   } catch {
     throw new EngineOffline();
   }
@@ -72,6 +75,7 @@ async function post<T>(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
+      signal: AbortSignal.timeout(8_000),
     });
   } catch {
     throw new EngineOffline();
@@ -84,24 +88,28 @@ export interface Scope {
   policy: string;
 }
 
+function scopeQuery(s: Scope): Record<string, string> {
+  return { split: s.split, policy: s.policy };
+}
+
 export const api = {
   health: () => get<Health>("/health"),
 
-  overview: (s: Scope) => get<Overview>("/ops/overview", { ...s }),
+  overview: (s: Scope) => get<Overview>("/ops/overview", scopeQuery(s)),
 
   receipts: (s: Scope, filters?: { status?: string; q?: string }) =>
     get<{ receipts: Receipt[]; total: number }>("/ops/receipts", {
-      ...s,
+      ...scopeQuery(s),
       ...(filters?.status ? { status: filters.status } : {}),
       ...(filters?.q ? { q: filters.q } : {}),
     }),
 
   receipt: (s: Scope, id: string) =>
-    get<ReceiptDetail>(`/ops/receipts/${id}`, { ...s }),
+    get<ReceiptDetail>(`/ops/receipts/${id}`, scopeQuery(s)),
 
   invoices: (s: Scope, filters?: { q?: string; openOnly?: boolean }) =>
     get<{ invoices: Invoice[]; total: number }>("/ops/invoices", {
-      ...s,
+      ...scopeQuery(s),
       ...(filters?.q ? { q: filters.q } : {}),
       ...(filters?.openOnly ? { open_only: "true" } : {}),
     }),
@@ -113,7 +121,12 @@ export const api = {
     s: Scope,
     id: string,
     body: { approver: string; approver_is_human: boolean; note?: string },
-  ) => post<ReceiptDetail>(`/ops/receipts/${id}/approve`, { ...s }, body),
+  ) =>
+    post<ReceiptDetail>(
+      `/ops/receipts/${id}/approve`,
+      scopeQuery(s),
+      body,
+    ),
 
   resolve: (
     s: Scope,
@@ -124,11 +137,16 @@ export const api = {
       invoice_id?: string;
       note?: string;
     },
-  ) => post<ReceiptDetail>(`/ops/receipts/${id}/resolve`, { ...s }, body),
+  ) =>
+    post<ReceiptDetail>(
+      `/ops/receipts/${id}/resolve`,
+      scopeQuery(s),
+      body,
+    ),
 
-  reset: (s: Scope) => post<{ ok: boolean }>("/ops/reset", { ...s }, {}),
+  reset: (s: Scope) => post<{ ok: boolean }>("/ops/reset", scopeQuery(s), {}),
 
-  scorecard: (s: Scope) => get<Scorecard>("/eval/scorecard", { ...s }),
+  scorecard: (s: Scope) => get<Scorecard>("/eval/scorecard", scopeQuery(s)),
 
   comparison: (split: string) =>
     get<{ rows: ComparisonRow[] }>("/eval/comparison", { split }),

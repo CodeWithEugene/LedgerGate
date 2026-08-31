@@ -275,7 +275,7 @@ export default function EvaluationPage() {
             <span className="text-sm text-muted-foreground">Proposer</span>
             <Select value={proposer} onValueChange={setProposer}>
               <SelectTrigger size="sm" className="w-[180px]">
-                <SelectValue />
+                <SelectValue placeholder="Proposer">{proposer}</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="reckless">reckless</SelectItem>

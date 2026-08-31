@@ -23,7 +23,7 @@ import { useScope } from "@/components/scope-provider";
 const POLICIES: { value: string; label: string; hint: string }[] = [
   {
     value: "reckless",
-    label: "Reckless (ungated)",
+    label: "Reckless",
     hint: "Posts against the first invoice it finds. No gate.",
   },
   {
@@ -33,7 +33,7 @@ const POLICIES: { value: string; label: string; hint: string }[] = [
   },
   {
     value: "baseline",
-    label: "Baseline (ungated)",
+    label: "Baseline",
     hint: "Fuzzy name match against the register. No gate.",
   },
   {
@@ -43,14 +43,19 @@ const POLICIES: { value: string; label: string; hint: string }[] = [
   },
   {
     value: "rules-only",
-    label: "Rules only (ungated)",
+    label: "Rules only",
     hint: "Faithful to AP-07, but nothing vetoes it.",
   },
   {
     value: "guarded",
-    label: "Guarded (recommended)",
+    label: "Guarded",
     hint: "The advanced solution: AP-07 proposer behind the gate.",
   },
+];
+
+const SPLITS: { value: string; label: string }[] = [
+  { value: "holdout", label: "Holdout" },
+  { value: "dev", label: "Development" },
 ];
 
 export function ScopeSwitcher() {
@@ -70,13 +75,17 @@ export function ScopeSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center justify-end gap-2">
       <Select value={policy} onValueChange={setPolicy}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <SelectTrigger size="sm" className="w-[190px]">
-              <SelectValue />
-            </SelectTrigger>
+            <span className="inline-flex">
+            <SelectTrigger size="sm" className="w-[148px] sm:w-[168px]">
+                <SelectValue placeholder="Policy">
+                  {POLICIES.find((option) => option.value === policy)?.label}
+                </SelectValue>
+              </SelectTrigger>
+            </span>
           </TooltipTrigger>
           <TooltipContent side="bottom" className="max-w-[260px]">
             Which agent processed this file. Switch it and watch the wrong
@@ -85,7 +94,11 @@ export function ScopeSwitcher() {
         </Tooltip>
         <SelectContent>
           {POLICIES.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem
+              key={option.value}
+              value={option.value}
+              textValue={option.label}
+            >
               <div className="flex flex-col items-start">
                 <span>{option.label}</span>
                 <span className="text-xs text-muted-foreground">
@@ -99,19 +112,29 @@ export function ScopeSwitcher() {
 
       <Select value={split} onValueChange={setSplit}>
         <SelectTrigger size="sm" className="w-[120px]">
-          <SelectValue />
+          <SelectValue placeholder="Split">
+            {SPLITS.find((option) => option.value === split)?.label}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="holdout">Holdout</SelectItem>
-          <SelectItem value="dev">Development</SelectItem>
+          {SPLITS.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline" size="sm" onClick={reset}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={reset}
+            aria-label="Reload file"
+          >
             <RotateCcw className="size-3.5" />
-            Reload file
+            <span className="hidden sm:inline">Reload file</span>
           </Button>
         </TooltipTrigger>
         <TooltipContent side="bottom">
