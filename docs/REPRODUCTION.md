@@ -4,8 +4,30 @@ Written for someone starting from a clean machine with nothing installed but
 Docker, or nothing installed but Python.
 
 **Every published number in this repository reproduces offline, with no API
-key and no network access, in under three seconds.** Nothing in the
-reproduction path spends money.
+key and no network access, in a few seconds.** Nothing in the reproduction path
+spends money.
+
+Stronger than that, and worth checking rather than believing: a fresh clone
+that runs the whole thing leaves **`git status` empty**. Every committed
+scorecard and every committed trajectory comes back byte for byte.
+
+```bash
+git clone <this repo> /tmp/check && cd /tmp/check
+make setup && make verify && make ablation
+git status --short          # prints nothing
+```
+
+That is only true because wall-clock timing is deliberately kept out of every
+committed artifact — it is a property of your machine, not of the policy. The
+headline table reports **tool steps** instead, which reproduce anywhere. Timing
+still prints on the terminal when you run a single evaluation.
+
+This is enforced, not remembered: three tests re-run policies and compare
+trajectories byte for byte, and a fourth scans `results/` and `traces/` for
+machine-dependent values. That fourth test exists because the byte-equality
+tests alone passed while the repository was still fragile — the timing column
+rounded to `0.0s` on the development laptop and would have rendered `0.1s` on a
+host three times slower. See [`CHANGELOG.md` §15](CHANGELOG.md).
 
 ---
 
@@ -21,7 +43,7 @@ not have to take "runs offline" on trust. The image is `python:3.11-slim`; the
 build is the only step that touches the network, and only to pull that base
 image and `pytest`.
 
-Expected: the corpus hash audit, 148 tests (141 run, 7 skipped), the baseline scorecard, the
+Expected: the corpus hash audit, 151 tests (144 run, 7 skipped), the baseline scorecard, the
 advanced scorecard, the headline comparison, and the gate audit, ending in
 
 ```
@@ -61,7 +83,7 @@ that can drift underneath a number printed in the README.
 | Step | Command | What it proves |
 |---|---|---|
 | 1 | `ledgergate audit` | The committed corpus matches its SHA-256 manifest, and all 9 ground-truth invariants re-derive from the data. If this fails, stop — everything downstream is meaningless. |
-| 2 | `pytest` | 148 tests (7 of them skip without cassettes), including the gate's soundness and sufficiency properties, the adversarial probes, and the submission-integrity checks. |
+| 2 | `pytest` | 151 tests (7 of them skip without cassettes), including the gate's soundness and sufficiency properties, the adversarial probes, and the submission-integrity checks. |
 | 3 | `ledgergate run --policy baseline --corpus holdout` | The baseline scorecard. |
 | 4 | `ledgergate run --policy guarded --corpus holdout` | The advanced scorecard. |
 | 5 | `ledgergate compare --corpus holdout --policies ...` | The comparison table published in the README, plus the cost-model sensitivity sweep. |
@@ -137,7 +159,7 @@ The properties that must hold on any machine:
 skip when `cassettes/` is empty, which it is in this submission. They cover the
 optional model-driven arm; see below. Nothing in the headline depends on them.
 
-The container and a local run report **the same** `141 passed, 7 skipped`. That
+The container and a local run report **the same** `144 passed, 7 skipped`. That
 is checked rather than assumed: a skip prints as success, so an image missing a
 directory the suite reads would silently verify less than the author does.
 `test_the_container_sees_everything_the_test_suite_reads` compares the

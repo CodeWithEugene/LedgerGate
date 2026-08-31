@@ -1,13 +1,13 @@
 corpus: dev
 
-policy         net value  exact acc  false pays  coverage  auto precision  over-esc  wall
--------------  ---------  ---------  ----------  --------  --------------  --------  ----
-reckless       -111000    25.0%      45          100.0%    25.0%           0         0.0s
-reckless+gate  +1635      80.0%      0           25.0%     100.0%          12        0.0s
-baseline       -58115     50.0%      24          71.7%     44.2%           6         0.0s
-baseline+gate  +2155      86.7%      0           31.7%     100.0%          8         0.0s
-rules-only     -11895     90.0%      6           55.0%     81.8%           0         0.0s
-guarded        +3195      100.0%     0           45.0%     100.0%          0         0.0s
+policy         net value  exact acc  false pays  coverage  auto precision  over-esc  steps
+-------------  ---------  ---------  ----------  --------  --------------  --------  -----
+reckless       -111000    25.0%      45          100.0%    25.0%           0         87
+reckless+gate  +1635      80.0%      0           25.0%     100.0%          12        432
+baseline       -58115     50.0%      24          71.7%     44.2%           6         162
+baseline+gate  +2155      86.7%      0           31.7%     100.0%          8         490
+rules-only     -11895     90.0%      6           55.0%     81.8%           0         357
+guarded        +3195      100.0%     0           45.0%     100.0%          0         399
 
 net value under different false-pay penalties (the ranking should not depend on the exact weight):
 

@@ -211,6 +211,38 @@ def test_every_tool_the_agent_is_offered_is_actually_exercised():
     )
 
 
+def test_no_committed_artifact_carries_a_machine_dependent_value():
+    """Byte-identical reproduction has to hold on machines that are not mine.
+
+    The previous version of this repository passed the byte-equality test above
+    and was still wrong: the headline table carried a wall-clock column that
+    rendered `0.0s` here only because the run takes 16ms. At `:.1f`, the
+    rounding boundary is 50ms -- so any host roughly three times slower, which
+    is an ordinary CI runner or an emulated container, would have rendered
+    `0.1s`, dirtied the tree and failed the README check, with nothing about
+    the policy having changed.
+
+    Timing survives on the terminal, where it is useful and costs nothing. It
+    is banned from anything committed.
+    """
+    committed = sorted(
+        p for p in (list((REPO_ROOT / "results").rglob("*")) + list((REPO_ROOT / "traces").rglob("*")))
+        if p.is_file() and p.suffix in {".json", ".jsonl", ".md"}
+    )
+    assert committed, "no generated artifacts found; run 'make verify' first"
+
+    banned = re.compile(r"wall_seconds|wall=|\bwall\b|elapsed|\d+\.\d+s\b")
+    offenders = [
+        f"{p.relative_to(REPO_ROOT)}: {banned.search(p.read_text(encoding='utf-8')).group(0)!r}"
+        for p in committed
+        if banned.search(p.read_text(encoding="utf-8"))
+    ]
+    assert not offenders, (
+        "committed artifacts contain machine-dependent timing, which breaks "
+        "byte-identical reproduction on slower hosts:\n  " + "\n  ".join(offenders)
+    )
+
+
 @pytest.mark.skipif(
     not (REPO_ROOT / "traces" / "guarded.holdout.jsonl").exists(),
     reason="trajectories not generated yet; run 'make verify'",

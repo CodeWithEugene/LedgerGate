@@ -21,7 +21,7 @@ Each file is JSONL with three record types:
 |---|---|
 | `header` | The policy name, the **full agent instructions** it operated under, every tool it was given with descriptions, the step budget, the human-approval threshold, and the corpus and seed. |
 | `episode` | One per receipt: the receipt as the bank delivered it, every tool call with its arguments and the observation that came back, every model turn with its text and requested tool calls, any retry, any rejected malformed submission and the corrective feedback sent back, the safety gate's verdict with each veto and the clause it cites, the final decision, what the ledger did with it, and whether a human checkpoint was triggered. |
-| `summary` | Decision count, steps used, wall time, ledger rejections by reason, items queued for human approval, policy errors, and model/token counters. |
+| `summary` | Decision count, steps used, ledger rejections by reason, items queued for human approval, policy errors, and model/token counters. Deliberately no wall-clock time: these files are committed and must reproduce byte for byte on any machine ([`CHANGELOG.md` §15](CHANGELOG.md)). |
 
 Read one as prose:
 

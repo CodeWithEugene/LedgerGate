@@ -125,6 +125,17 @@ def render_scorecard(card: Scorecard, queued_for_approval: int | None = None) ->
 
 
 def render_comparison(cards: Iterable[Scorecard]) -> str:
+    """The headline table. Committed to `results/` and synced into the README.
+
+    Cost is reported as tool steps rather than wall-clock seconds. Steps are a
+    property of the policy and reproduce anywhere; seconds are a property of
+    whichever machine happened to run it. This table is a committed artifact,
+    so a machine-dependent column in it would mean a reviewer reproducing the
+    results gets a dirty tree through no fault of their own -- and on a host
+    only three times slower than the development laptop, `0.0s` starts
+    rendering as `0.1s`. Wall time is still printed by `render_scorecard`,
+    which goes to the terminal and is not committed.
+    """
     cards = list(cards)
     rows = []
     for c in cards:
@@ -137,11 +148,11 @@ def render_comparison(cards: Iterable[Scorecard]) -> str:
             f"{h['coverage']:.1%}",
             f"{h['automation_precision']:.1%}",
             str(c.counts.get(OVER_ESCALATION, 0)),
-            f"{c.wall_seconds:.1f}s",
+            str(c.steps_used),
         ])
     return _table(
         ["policy", "net value", "exact acc", "false pays", "coverage",
-         "auto precision", "over-esc", "wall"],
+         "auto precision", "over-esc", "steps"],
         rows,
     )
 

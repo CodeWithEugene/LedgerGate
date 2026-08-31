@@ -58,14 +58,14 @@ proposer, then the same proposer behind the gate. Every number is produced by
 ```
 corpus: holdout
 
-policy         net value  exact acc  false pays  coverage  auto precision  over-esc  wall
--------------  ---------  ---------  ----------  --------  --------------  --------  ----
-reckless       -111000    25.0%      45          100.0%    25.0%           0         0.0s
-reckless+gate  +1635      80.0%      0           25.0%     100.0%          12        0.0s
-baseline       -57985     51.7%      24          73.3%     45.5%           5         0.0s
-baseline+gate  +2285      88.3%      0           33.3%     100.0%          7         0.0s
-rules-only     -11895     90.0%      6           55.0%     81.8%           0         0.0s
-guarded        +3195      100.0%     0           45.0%     100.0%          0         0.0s
+policy         net value  exact acc  false pays  coverage  auto precision  over-esc  steps
+-------------  ---------  ---------  ----------  --------  --------------  --------  -----
+reckless       -111000    25.0%      45          100.0%    25.0%           0         87
+reckless+gate  +1635      80.0%      0           25.0%     100.0%          12        432
+baseline       -57985     51.7%      24          73.3%     45.5%           5         162
+baseline+gate  +2285      88.3%      0           33.3%     100.0%          7         491
+rules-only     -11895     90.0%      6           55.0%     81.8%           0         357
+guarded        +3195      100.0%     0           45.0%     100.0%          0         399
 
 net value under different false-pay penalties (the ranking should not depend on the exact weight):
 
@@ -93,6 +93,14 @@ that is 45% decided but **30% posted with no human at all**, and
 Escalation (an analyst has to decide) and approval (a decided posting is large
 enough to need countersigning) are different controls and are counted
 separately.
+
+`steps` is tool calls, and it is the gate's other cost: it re-derives the
+evidence itself rather than trusting what the proposer hands it, so putting it
+behind `reckless` takes 87 steps to 432. That independence is the point — a
+gate that reused the proposer's evidence would inherit the proposer's mistake —
+but it is not free, and the column is there rather than hidden. It is also why
+this table reports steps and not seconds: steps are a property of the policy
+and reproduce on any machine.
 
 The second table exists because *I* chose those costs. It sweeps the false-pay
 penalty across a 48× range and the ranking never changes — not even at −250,
@@ -224,8 +232,14 @@ make docker-verify               # docker run --network none
 
 `make verify` regenerates nothing it cannot re-derive: it re-checks the corpus
 hashes and every ground-truth invariant, runs the full test suite, scores the
-baseline and the advanced solution, and rewrites the table above. If the README
-table ever drifts from the generated results, `tests/test_submission.py` fails.
+baseline and the advanced solution, rewrites the table above, and prints the
+gate audit. If the README table ever drifts from the generated results,
+`tests/test_submission.py` fails.
+
+**A fresh clone that runs all of it leaves `git status` empty.** Every
+committed scorecard and trajectory comes back byte for byte — no timestamps, no
+wall-clock times, nothing that differs between machines. Check it rather than
+believe it; it takes about ten seconds.
 
 Full instructions, versions, runtimes and costs: **[`docs/REPRODUCTION.md`](docs/REPRODUCTION.md)**.
 Improvement changelog: **[`docs/CHANGELOG.md`](docs/CHANGELOG.md)**.

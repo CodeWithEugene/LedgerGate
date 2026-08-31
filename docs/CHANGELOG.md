@@ -464,11 +464,73 @@ summary line, which means the environment a reviewer trusts most was running
 the weaker suite. Fixed by copying `traces/` into the image, and
 `test_the_container_sees_everything_the_test_suite_reads` now compares the
 Dockerfile's `COPY` directives against the directories the suite reads. Both
-environments now report **141 passed, 7 skipped**, identically.
+environments now report the same tally, identically.
 
 ---
 
-## 15. What I know is still wrong
+## 15. Iteration: reproduction left a dirty working tree
+
+**Evidence.** Cloning the repository fresh and running `make verify`:
+
+```
+ M results/guarded.holdout.json      M traces/guarded.holdout.jsonl
+ M results/baseline.holdout.json     M traces/baseline.holdout.jsonl
+ ... nine files in total
+```
+
+**Diagnosis.** Every one of the nine differed only in `wall_seconds`
+(`0.020` → `0.018`). No decision, step count, veto or ledger block moved. The
+results were reproducible; the *artifacts* were not.
+
+That distinction matters more than it first looks. The repository asks a
+reviewer to trust that committed numbers came from the committed code, and
+backs it with hashes and a self-fingerprinting verifier. Then reproducing it
+hands them nine modified files and leaves them to diff it themselves to find
+out nothing important changed. The claim survives; the reviewer's confidence in
+it does not, and confidence is the whole product here.
+
+**Change.** Wall-clock time is no longer written to `results/` or `traces/`. It
+is a property of the machine, not of the policy, and step count already carries
+the same information deterministically. It still prints on every scorecard.
+Three tests now re-run policies and compare trajectories **byte for byte**
+against the committed files, rather than comparing a chosen subset of fields —
+the weaker assertion is what let this sit unnoticed.
+
+A fresh clone that runs `make verify && make ablation` now leaves `git status`
+empty.
+
+**Then the byte-equality test passed while the repository was still wrong.**
+The headline table — committed to `results/` and synced into the README — kept
+a wall-clock column. It rendered `0.0s` on every row, so byte equality held
+here. Measured, the `guarded` run takes **16ms**, and `:.1f` rounds at
+**50ms**: any host about three times slower renders `0.1s`. An ordinary CI
+runner, an emulated container, a laptop on battery. The reproduction claim was
+resting on the development machine being fast, which is not a property of this
+repository at all.
+
+Fixed by reporting **tool steps** instead of seconds in that table. Steps are a
+property of the policy, reproduce anywhere, and are the more honest cost
+measure regardless — they expose that the gate takes `reckless` from 87 steps
+to 432, because it re-derives evidence independently instead of trusting the
+proposer's. That number was previously invisible. Wall time still prints on
+the terminal, where it is useful and not committed.
+
+Now enforced by `test_no_committed_artifact_carries_a_machine_dependent_value`,
+which scans everything under `results/` and `traces/` for timing patterns —
+rather than by my remembering.
+
+**Why this is here.** Two rounds, and the first fix looked complete. The tell
+both times was an assertion weaker than the claim: the original test compared
+net value, false pays and the verifier hash — the fields I thought to check —
+and byte equality then held only by the accident of a rounding boundary. A
+reproducibility guarantee that depends on the reviewer's hardware being as fast
+as mine is not a guarantee, and no amount of re-running it *here* would ever
+have shown that. The general lesson from §12 to §14 arriving twice more:
+**test the property, not the symptom you happened to observe.**
+
+---
+
+## 16. What I know is still wrong
 
 - **The holdout is a reseed, not a distribution shift.** It differs in
   identifiers, names, amounts and dates, but it is drawn from the same
