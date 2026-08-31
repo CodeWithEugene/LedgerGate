@@ -55,7 +55,7 @@ not have to take "runs offline" on trust. The image is `python:3.11-slim`; the
 build is the only step that touches the network, and only to pull that base
 image and `pytest`.
 
-Expected: the corpus hash audit, 158 tests (151 run, 7 skipped), the baseline scorecard, the
+Expected: the corpus hash audit, 171 tests (164 run, 7 skipped), the baseline scorecard, the
 advanced scorecard, the headline comparison, and the gate audit, ending in
 
 ```
@@ -95,7 +95,7 @@ that can drift underneath a number printed in the README.
 | Step | Command | What it proves |
 |---|---|---|
 | 1 | `ledgergate audit` | The committed corpus matches its SHA-256 manifest, and all 9 ground-truth invariants re-derive from the data. If this fails, stop — everything downstream is meaningless. |
-| 2 | `pytest` | 158 tests (7 of them skip without cassettes), including the gate's soundness and sufficiency properties, the adversarial probes, and the submission-integrity checks. |
+| 2 | `pytest` | 171 tests (7 of them skip without cassettes), including the gate's soundness and sufficiency properties, the adversarial probes, the operator-interface invariants, and the submission-integrity checks. |
 | 3 | `ledgergate run --policy baseline --corpus holdout` | The baseline scorecard. |
 | 4 | `ledgergate run --policy guarded --corpus holdout` | The advanced scorecard. |
 | 5 | `ledgergate compare --corpus holdout --policies ...` | The comparison table published in the README, plus the cost-model sensitivity sweep. |

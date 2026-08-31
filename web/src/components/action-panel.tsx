@@ -27,7 +27,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useScope } from "@/components/scope-provider";
 import { api } from "@/lib/api";
-import { money } from "@/lib/format";
+import { checkpointReason, money } from "@/lib/format";
 import type { Invoice, ReceiptDetail } from "@/lib/types";
 
 /**
@@ -87,9 +87,7 @@ export function ApproveDialog({
         <DialogHeader>
           <DialogTitle>Approve {receipt.payment_id}</DialogTitle>
           <DialogDescription>
-            {receipt.human_checkpoint.reason
-              ? `Queued because the ${receipt.human_checkpoint.reason}.`
-              : "This posting is waiting on a second signature."}
+            {checkpointReason(receipt.human_checkpoint.reason)}
           </DialogDescription>
         </DialogHeader>
 

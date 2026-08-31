@@ -213,20 +213,27 @@ def _receipt_row(session: Session, payment) -> dict:
     }
 
 
-def _invoice_row(invoice) -> dict:
+def _invoice_row(invoice, ledger) -> dict:
+    """One row of the register as the analyst should see it.
+
+    `outstanding` and `settled` are not properties of the invoice -- they are
+    the ledger's opinion, after opening allocations and anything posted during
+    this session. Reading them off the invoice would show a register that
+    disagrees with what the agent just did to it.
+    """
     return {
         "invoice_id": invoice.invoice_id,
         "invoice_number": invoice.invoice_number,
         "vendor_id": invoice.vendor_id,
         "vendor_name": invoice.vendor_name,
         "currency": invoice.currency,
-        "face_amount_cents": invoice.face_amount_cents,
+        "face_amount_cents": invoice.amount_cents,
         "net_due_cents": invoice.net_due_cents,
-        "outstanding_cents": invoice.outstanding_cents,
+        "outstanding_cents": ledger.outstanding_cents(invoice.invoice_id),
         "credit_note_cents": invoice.credit_note_cents,
         "issue_date": invoice.issue_date,
         "due_date": invoice.due_date,
-        "settled": invoice.settled,
+        "settled": ledger.is_settled(invoice.invoice_id),
     }
 
 
@@ -399,9 +406,9 @@ def receipt_detail(match, query):
 
 @route("GET", "/api/ops/invoices")
 def invoices(_match, query):
-    split, _policy = _params(query)
-    corpus = load_corpus(DATA_ROOT, split)
-    rows = [_invoice_row(i) for i in corpus.invoices]
+    split, policy = _params(query)
+    session = get_session(split, policy)
+    rows = [_invoice_row(i, session.ledger) for i in session.corpus.invoices]
 
     search = (query.get("q") or [""])[0].strip().lower()
     if search:
@@ -507,12 +514,27 @@ def reset(_match, query, body=None):
 # --- evaluation: the reviewer's view, and the only place truth appears -------
 
 
+def _score(session: Session):
+    """Grade a session the way `make eval` grades a run.
+
+    `steps_used` and `ledger_blocks` are keyword arguments with harmless
+    defaults, which makes them easy to omit and then quietly publish zeros. The
+    single call site exists so the interface cannot drift from the CLI.
+    """
+    return score(
+        session.policy,
+        session.corpus,
+        session.result.decisions,
+        ledger_blocks=session.result.ledger_blocks,
+        steps_used=session.result.steps_used,
+    )
+
+
 @route("GET", "/api/eval/scorecard")
 def scorecard(_match, query):
     split, policy = _params(query)
     session = get_session(split, policy)
-    card = score(policy, session.corpus, session.result.decisions)
-    return card.to_dict()
+    return _score(session).to_dict()
 
 
 @route("GET", "/api/eval/comparison")
@@ -521,8 +543,7 @@ def comparison(_match, query):
     rows = []
     for policy in POLICIES:
         session = get_session(split, policy)
-        card = score(policy, session.corpus, session.result.decisions)
-        data = card.to_dict()
+        data = _score(session).to_dict()
         rows.append({
             "policy": policy,
             "gated": policy.endswith("+gate") or policy == "guarded",

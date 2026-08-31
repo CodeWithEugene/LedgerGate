@@ -29,6 +29,26 @@ export class EngineOffline extends Error {
   }
 }
 
+/**
+ * Turn a response into data, or into the most useful error we can name.
+ *
+ * The engine reports every failure of its own as JSON `{"error": ...}`, right
+ * down to the 500s. So a 5xx carrying no such body did not come from the
+ * engine at all -- it is the Next rewrite telling us it could not reach the
+ * other end. That distinction is worth drawing, because the likeliest reason
+ * anyone sees this screen is that they ran `make web` without `make web-api`,
+ * and "Internal Server Error" would send them looking for a bug instead of a
+ * second terminal.
+ */
+async function unwrap<T>(response: Response): Promise<T> {
+  const payload = await response.json().catch(() => null);
+  if (response.ok) return payload as T;
+  const reported = (payload as { error?: string } | null)?.error;
+  if (reported) throw new Error(reported);
+  if (response.status >= 500) throw new EngineOffline();
+  throw new Error(response.statusText);
+}
+
 async function get<T>(path: string, params?: Record<string, string>): Promise<T> {
   const query = params ? `?${new URLSearchParams(params)}` : "";
   let response: Response;
@@ -37,9 +57,7 @@ async function get<T>(path: string, params?: Record<string, string>): Promise<T>
   } catch {
     throw new EngineOffline();
   }
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(payload.error ?? response.statusText);
-  return payload as T;
+  return unwrap<T>(response);
 }
 
 async function post<T>(
@@ -58,9 +76,7 @@ async function post<T>(
   } catch {
     throw new EngineOffline();
   }
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(payload.error ?? response.statusText);
-  return payload as T;
+  return unwrap<T>(response);
 }
 
 export interface Scope {

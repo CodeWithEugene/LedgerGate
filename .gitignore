@@ -4,6 +4,15 @@ __pycache__/
 .pytest_cache/
 .DS_Store
 
+# The operator interface. Source is tracked; build output and the dependency
+# tree are not. `make verify` does not touch any of this -- the engine has no
+# runtime dependencies and the web layer is strictly downstream of it.
+web/node_modules/
+web/.next/
+web/out/
+web/next-env.d.ts
+web/.turbo/
+
 # Credentials must never enter the repository.
 .env
 *.key

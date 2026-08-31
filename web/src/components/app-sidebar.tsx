@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -50,8 +51,26 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b">
         <div className="flex items-center gap-2 px-2 py-1.5">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <ShieldCheck className="size-4" />
+          {/* Two files rather than one tinted image: the mark is a knockout,
+              so its ledger rules are transparent-safe white and cannot be
+              recoloured with a CSS filter without losing them. */}
+          <div className="relative size-8 shrink-0">
+            <Image
+              src="/logo-mark.png"
+              alt=""
+              width={64}
+              height={64}
+              priority
+              className="size-8 dark:hidden"
+            />
+            <Image
+              src="/logo-mark-light.png"
+              alt=""
+              width={64}
+              height={64}
+              priority
+              className="hidden size-8 dark:block"
+            />
           </div>
           <div className="grid text-sm leading-tight group-data-[collapsible=icon]:hidden">
             <span className="font-semibold">LedgerGate</span>

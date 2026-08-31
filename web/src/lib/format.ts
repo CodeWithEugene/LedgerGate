@@ -87,3 +87,15 @@ export function parseVeto(text: string): {
 export function humanTool(name: string): string {
   return name.replace(/_/g, " ");
 }
+
+/**
+ * The engine records why a posting was held as `allocation at or above
+ * 2500000 cents`, which is the right thing to write into a trajectory and the
+ * wrong thing to show someone who is about to sign for the money.
+ */
+export function checkpointReason(reason?: string): string {
+  if (!reason) return "This posting is waiting on a second signature.";
+  const limit = /at or above (\d+) cents/.exec(reason);
+  if (!limit) return reason;
+  return `This allocation is at or above the ${money(Number(limit[1]))} approval limit, so it cannot post without a second signature.`;
+}

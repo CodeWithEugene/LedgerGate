@@ -5,6 +5,7 @@
 #   make eval-baseline   score the baseline on the holdout split
 #   make eval-advanced   score the advanced solution on the holdout split
 #   make headline        the comparison table that appears in the README
+#   make web-api         serve the engine as JSON, then `make web` for the UI
 #
 # Nothing in `make verify` needs network access or an API key. The optional
 # model-driven arm is behind `make record-llm`; see docs/PROBLEM.md.
@@ -20,7 +21,7 @@ DEV := --corpus dev
 .DEFAULT_GOAL := help
 .PHONY: help setup corpus audit test eval-baseline eval-advanced headline \
         gate-audit sync-readme ablation approve verify clean docker-verify \
-        trace-sample record-llm headline-llm demo
+        trace-sample record-llm headline-llm demo web web-api web-install
 
 help:
 	@grep -E '^[a-z-]+:.*?##' $(MAKEFILE_LIST) | sed 's/:.*##/\t/' | expand -t22
@@ -63,6 +64,21 @@ ablation: ## the same curve on the development split
 		reckless reckless+gate \
 		baseline baseline+gate \
 		rules-only guarded
+
+# -- the operator interface -------------------------------------------------
+# A cash application analyst is not going to run `make`. `web/` is a Next.js
+# front end over the engine; `web-api` is the standard-library server it talks
+# to. Node is needed for the interface only -- the engine, the evaluation and
+# `make verify` remain dependency-free, and none of them import this.
+
+web-api: ## serve the engine as JSON on :8787 (the interface talks to this)
+	$(VPY) -m ledgergate.webapi --port 8787
+
+web-install: ## install the interface's dependencies (needs Node 20+)
+	cd web && npm install
+
+web: ## run the operator interface on :3400 (start `make web-api` first)
+	cd web && npm run dev
 
 # -- optional: the model-driven arm ----------------------------------------
 # Needs an API credential to record, and committed cassettes to replay. It is

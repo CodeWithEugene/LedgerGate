@@ -239,6 +239,38 @@ Optionally show entry 5 for ten seconds:
 
 ---
 
+## Optional cutaway — the operator interface
+
+Only if you are under time. The five required beats come first; this is worth
+20 seconds if you have them, and worth cutting if you do not.
+
+**Before recording:** `make web-api` in one terminal, `make web` in another,
+and load <http://localhost:3400> once so Next has compiled the routes. A
+first-visit compile takes a couple of seconds and looks like a hang on camera.
+
+**On screen:** the inbox, then one withheld receipt, then the clause.
+
+> "Everything so far has been a terminal, and the person this is for does not
+> work in one. Same engine, served as JSON — this is the morning's file:
+> eighteen posted, nine waiting on a signature, thirty-three she needs to look
+> at.
+>
+> This is one the gate stopped. It reads the procedure, resolves the vendor,
+> finds the invoice, asks for an FX rate, doesn't get one — and the gate
+> refuses the posting it was about to make. The clause is a link." *(click it)*
+> "That's AP-07.9, in the words the business wrote.
+>
+> One thing worth saying about this screen: it cannot see ground truth. The
+> corpus ships with a label for every receipt, and a real AP team has no such
+> file. There's a test that deletes the labels and requires every one of these
+> payloads to come back byte-identical."
+
+Do **not** demo approving on camera unless you have time to explain that the
+ledger, not the button, is what refuses a non-human approver. Shown without
+that, it looks like a form.
+
+---
+
 ## Checklist before uploading
 
 - [ ] Under 5:00.

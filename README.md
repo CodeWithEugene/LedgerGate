@@ -1,4 +1,4 @@
-# LedgerGate
+<img src="docs/brand/logo-wordmark.png" alt="LedgerGate" height="52">
 
 **An untrusted agent applies cash to supplier invoices. One small veto-only
 gate makes it safe to deploy — and I measure exactly what that safety costs.**
@@ -246,6 +246,45 @@ Improvement changelog: **[`docs/CHANGELOG.md`](docs/CHANGELOG.md)**.
 
 ---
 
+## See it from Dana's side
+
+Everything above is an evaluation harness, and it reads like one. But the
+person this system is for spends her day in a queue, not in a terminal, and a
+control she cannot interrogate is a control she will learn to click through.
+
+```bash
+make web-install                 # once — needs Node 20+
+make web-api                     # terminal 1 — the engine as JSON, on :8787
+make web                         # terminal 2 — the interface, on :3400
+```
+
+[`web/`](web/) is a Next.js and [shadcn/ui](https://ui.shadcn.com/) front end
+over the same engine: the morning's bank file, the agent's investigation
+rendered as something readable, the escalation queue with each item leading
+with the clause that stopped it, and dual-authorisation sign-off for anything
+over the approval limit.
+
+Two properties are worth more than the screenshots:
+
+**The analyst's screens cannot see ground truth.** `truth.json` exists to grade
+policies; a real deployment has no such file. Every operator endpoint is built
+strictly from what the system could know without it, and
+`tests/test_webapi.py` proves it by deleting the labels and requiring the
+payloads to come back byte-identical. The answer key appears only in the
+Evaluation section, which is labelled as the reviewer's view.
+
+**The interface has no privileged path to the ledger.** Approving calls
+`SandboxLedger.approve`, which raises unless a human is named. Resolving an
+escalation records the analyst's disposition but does not post it — an
+allocation the gate never reviewed would bypass the one control this project
+exists to argue for. That is a real limitation, and it is written down as one
+in [`web/README.md`](web/README.md) rather than papered over.
+
+The engine keeps its zero runtime dependencies: `src/ledgergate/webapi.py` is
+standard-library `http.server`, and nothing in `make verify` imports Node.
+
+---
+
 ## The three ideas worth your time
 
 ### 1. The gate is monotone, and that is the whole trick
@@ -357,6 +396,8 @@ src/ledgergate/
   policies/       reckless, baseline, guarded, llm, and gated.Gated (wraps any)
   llm/            stdlib API client + content-addressed cassettes
   evaluation/     frozen verifier, cost model, reports
+  webapi.py       the engine as JSON. stdlib http.server. ops vs eval split.
+web/              Next.js + shadcn/ui operator interface (the only Node here)
 docs/             problem analysis, architecture, changelog, agent disclosure
 tests/            properties, adversarial probes, submission integrity
 data/             both corpus splits, hashed

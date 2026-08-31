@@ -638,7 +638,86 @@ it.
 
 ---
 
-## 18. What I know is still wrong
+## 18. Design decision: an operator interface, and the two ways it could have made this worse
+
+Everything up to here is an evaluation harness. It answers "does the gate
+work" and it reads like what it is. But the person the system is for opens a
+queue, and a control she cannot interrogate is a control she will learn to
+click through. So: [`web/`](../web/), a Next.js and shadcn/ui front end over
+the same engine, and `src/ledgergate/webapi.py` to serve it.
+
+A user interface is where safety properties quietly die. It is written last,
+it is under the most pressure to be helpful, and it is the natural home for a
+convenience endpoint that turns out to be a way around the control the rest of
+the system exists to enforce. Two specific risks, and what was done about each.
+
+**It could have shown the analyst the answer key.** `data/*/truth.json` labels
+every receipt. Any screen built with it would look excellent and demonstrate a
+system that cannot be deployed, because a real AP team has no such file — if
+it did, there would be nothing to automate. So the API is split: `/api/ops/`
+for the analyst, `/api/eval/` for the reviewer, and the operator side never
+touches truth.
+
+Proving that turned out to be more interesting than implementing it. The
+obvious test scans operator payloads for hazard names, and it fails
+immediately — on the gate working correctly. A receipt labelled
+`CURRENCY_MISMATCH` is vetoed by a rule *called* `CURRENCY_MISMATCH`, and a
+policy that finds nothing abstains with `NO_CANDIDATE`. Both strings are
+derived from tool observations that exist in any deployment. I subtracted the
+overlapping vocabulary twice before recognising that I was fitting the test to
+the code, which is how a test stops meaning anything.
+
+The property actually worth having is *independence*, and it can be checked
+directly: strip the labels out of the corpus, re-run, and require every
+operator payload to come back byte-identical. That is
+`test_the_operator_view_is_byte_identical_without_the_answer_key`, with a
+control asserting the reviewer's view does break — otherwise the comparison
+would only be showing that neither view read truth to begin with.
+
+**It could have become a second path to the ledger.** Approving through the
+web layer goes through `SandboxLedger.approve`, which raises unless a human is
+named; the interface inherits every refusal the CLI gets and has no privileged
+route. Resolving an escalation was the harder call. The natural feature is
+"analyst picks the right invoice and it posts" — and that would write an
+allocation the safety gate never reviewed, through the exact hole this project
+argues against. So it records the disposition and does not post it. The honest
+version re-runs the proposal through the gate with the analyst's invoice
+pinned. That is real work and it is not built; it is written down as a
+limitation in [`web/README.md`](../web/README.md) instead.
+
+**What the interface caught in the engine.** Two bugs, both from rendering
+data the CLI never rendered. The invoice register read `face_amount_cents`,
+`outstanding_cents` and `settled` off the `Invoice` dataclass, where none of
+them exist — outstanding balance is the *ledger's* opinion after opening
+allocations and anything posted this session, not a property of the invoice.
+And the scorecard endpoint omitted `steps_used`, a keyword argument with a
+default of `0`, so the Evaluation tab published zeros next to figures the
+README gives as 399 and 162. Both are now covered by a test that requires the
+API and the committed results to agree.
+
+**The failure a reviewer was most likely to hit.** Next serves the interface
+and rewrites `/api/*` to the Python engine, so `make web` without `make
+web-api` is a stack that starts cleanly and then fails on every request. The
+client had a typed `EngineOffline` error and a screen for it that said "start
+the engine", and neither ever fired: the rewrite fails on its own before the
+browser's `fetch` can, and returns a bare 500 reading `Internal Server Error`.
+So the one mistake the setup invites produced the one message guaranteed to
+send someone looking for a bug in the engine instead of at a second terminal.
+
+The two cases are distinguishable, because the engine answers every failure of
+its own in JSON with an `error` key — a 5xx without one did not come from the
+engine. The client now reads it that way. That is an inference about another
+process's behaviour, though, and it is only sound while that behaviour holds,
+so it is pinned by a test that drives the real server and asserts the shape of
+its 400s, 403s and 404s rather than left as a comment in the TypeScript.
+
+The engine keeps its zero runtime dependencies. `webapi.py` is standard-library
+`http.server`, `make verify` does not import Node, and the whole `web/` tree is
+downstream of an engine that does not know it exists.
+
+---
+
+## 19. What I know is still wrong
 
 - **The holdout is a reseed, not a distribution shift.** It differs in
   identifiers, names, amounts and dates, but it is drawn from the same
