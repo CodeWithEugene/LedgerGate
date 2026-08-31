@@ -519,6 +519,28 @@ Now enforced by `test_no_committed_artifact_carries_a_machine_dependent_value`,
 which scans everything under `results/` and `traces/` for timing patterns —
 rather than by my remembering.
 
+**Confirmed on hardware rather than argued.** Building the image for
+`linux/amd64` and running it emulated on an arm64 laptop gives a machine
+several times slower, and it reports exactly the predicted value:
+
+```
+$ docker run --platform linux/amd64 ... ledgergate:amd64
+cost: steps=399 wall=0.1s llm_calls=0
+                     ^^^^ 0.0s on the development laptop
+```
+
+So the old table really would have differed there. With steps instead, the
+artifacts hash identically across the two architectures:
+
+```
+3d906d123f6692440d3d  results/headline.holdout.md
+017319d154b87a5ce6df  traces/guarded.holdout.jsonl
+9cdc5a70d8b87603112b  results/guarded.holdout.json
+```
+
+— the same three hashes on both. The reproduction claim now holds across
+architectures, not just across runs on one machine.
+
 **Why this is here.** Two rounds, and the first fix looked complete. The tell
 both times was an assertion weaker than the claim: the original test compared
 net value, false pays and the verifier hash — the fields I thought to check —

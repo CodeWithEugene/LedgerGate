@@ -29,6 +29,18 @@ tests alone passed while the repository was still fragile — the timing column
 rounded to `0.0s` on the development laptop and would have rendered `0.1s` on a
 host three times slower. See [`CHANGELOG.md` §15](CHANGELOG.md).
 
+**Verified across architectures, not just across runs.** The artifacts hash
+identically on an arm64 host and inside an emulated `linux/amd64` container —
+a machine slow enough that it does report `wall=0.1s` on the terminal:
+
+```bash
+docker build --platform linux/amd64 -t ledgergate:amd64 .
+docker run --rm --network none --platform linux/amd64 ledgergate:amd64 sh -c '
+  python -m ledgergate.cli compare --corpus holdout --policies \
+    reckless reckless+gate baseline baseline+gate rules-only guarded >/dev/null
+  sha256sum results/headline.holdout.md traces/guarded.holdout.jsonl'
+```
+
 ---
 
 ## The one command
