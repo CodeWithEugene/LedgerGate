@@ -211,6 +211,39 @@ def test_every_tool_the_agent_is_offered_is_actually_exercised():
     )
 
 
+def test_every_section_reference_between_documents_resolves():
+    """`CHANGELOG.md §9` has to still be the section it was when I wrote it.
+
+    The changelog is numbered and it grew by insertion, so every renumbering
+    silently invalidates pointers held in four other files. A reference to a
+    section that has quietly become something else is worse than no reference:
+    it sends a reviewer checking a claim to a passage about a different bug,
+    and the natural conclusion is that the claim was made up.
+    """
+    docs = {p.name: p for p in (REPO_ROOT / "docs").glob("*.md")}
+    docs["README.md"] = REPO_ROOT / "README.md"
+
+    def sections(name):
+        text = docs[name].read_text(encoding="utf-8")
+        return {int(m) for m in re.findall(r"^## (\d+)\.", text, re.M)}
+
+    # A section number binds to the last document named on the same line, so
+    # "CHANGELOG.md §5, §8, §9" and "docs/CHANGELOG.md §12-§14" both resolve;
+    # a bare "see §6 below" binds to the document it appears in.
+    token = re.compile(r"([A-Za-z_]+\.md)|§(\d+)")
+    broken = []
+    for source in [REPO_ROOT / "README.md", *sorted((REPO_ROOT / "docs").glob("*.md"))]:
+        for line in source.read_text(encoding="utf-8").splitlines():
+            target = source.name
+            for named, number in token.findall(line):
+                if named:
+                    target = named
+                elif target in docs and int(number) not in sections(target):
+                    broken.append(f"{source.name}: '§{number}' -> {target}, which has no such section")
+
+    assert not broken, "stale section references:\n  " + "\n  ".join(broken)
+
+
 def test_no_committed_artifact_carries_a_machine_dependent_value():
     """Byte-identical reproduction has to hold on machines that are not mine.
 
