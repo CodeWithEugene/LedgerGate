@@ -1,0 +1,2050 @@
+[
+  {
+    "corpus": "dev",
+    "corpus_seed": 20260828,
+    "cost": {
+      "llm_calls": 0,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0,
+      "steps_used": 87,
+      "wall_seconds": 0.007
+    },
+    "cost_model": {
+      "CORRECT_ABSTAIN": 15,
+      "CORRECT_MATCH": 100,
+      "OVER_ESCALATION": -30,
+      "UNSAFE_MATCH": -2500,
+      "WRONG_AMOUNT": -400,
+      "WRONG_INVOICE": -2500
+    },
+    "counts": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 15,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 33,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 12
+    },
+    "failures": [
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0025:218697} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "DUPLICATE_PAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0002"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0027'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "BANK_FEE",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0004"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0028'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "ROUNDING_FX",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0005"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0031', 'DEV-INV0032', 'DEV-INV0033'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0008"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0036'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0010"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:1090200} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PARTIAL_SILENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0011"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:345210} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CONSOLIDATED_AMBIGUOUS",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0012"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0042:755156} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "AMBIGUOUS_TWIN",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0013"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0045:539398} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "WRONG_REF_CONFLICT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0014"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0046:873468} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0015"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0047:216202} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "ALREADY_SETTLED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0016"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:-686951} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "REVERSAL",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0017"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:472826} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "OVERPAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0018"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0050:853780} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0019"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:913278} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "NO_CANDIDATE",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0020"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0051:4762743} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "DUPLICATE_PAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0022"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0053'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "BANK_FEE",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0024"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0054'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "ROUNDING_FX",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0025"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0057', 'DEV-INV0058', 'DEV-INV0059'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0028"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0062'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0030"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:308106} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PARTIAL_SILENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0031"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:383976} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CONSOLIDATED_AMBIGUOUS",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0032"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0068:74151} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "AMBIGUOUS_TWIN",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0033"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0071:665407} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "WRONG_REF_CONFLICT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0034"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0072:482025} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0035"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0073:308918} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "ALREADY_SETTLED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0036"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:-496137} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "REVERSAL",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0037"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:88331} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "OVERPAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0038"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0076:643063} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0039"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:1372121} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "NO_CANDIDATE",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0040"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0077:1753672} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "DUPLICATE_PAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0042"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0079'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "BANK_FEE",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0044"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0080'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "ROUNDING_FX",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0045"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0083', 'DEV-INV0084', 'DEV-INV0085'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0048"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0088'], posted ['DEV-INV0001']",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0050"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:1086081} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PARTIAL_SILENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0051"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:324852} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CONSOLIDATED_AMBIGUOUS",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0052"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0094:568450} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "AMBIGUOUS_TWIN",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0053"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0097:380954} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "WRONG_REF_CONFLICT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0054"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0098:150213} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0055"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0099:207700} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "ALREADY_SETTLED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0056"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:-643310} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "REVERSAL",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0057"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:422667} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "OVERPAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0058"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0102:370999} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0059"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0001:398784} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "NO_CANDIDATE",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0060"
+      }
+    ],
+    "headline": {
+      "abstain_precision": 0.0,
+      "abstain_recall": 0.0,
+      "automation_precision": 0.25,
+      "coverage": 1.0,
+      "exact_accuracy": 0.25,
+      "false_pay_count": 45,
+      "false_pay_rate": 0.75,
+      "net_value": -111000
+    },
+    "ledger_blocks": {
+      "REJECTED_CURRENCY_MISMATCH": 3,
+      "REJECTED_DUPLICATE_PAYMENT": 3,
+      "REJECTED_NON_POSITIVE": 3,
+      "REJECTED_OVERAPPLICATION": 23
+    },
+    "per_hazard": {
+      "ALREADY_SETTLED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "AMBIGUOUS_TWIN": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "BANK_FEE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 3
+      },
+      "CLEAN_EXACT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_AMBIGUOUS": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 3
+      },
+      "CREDIT_NOTE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CROSS_VENDOR_TRAP": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CURRENCY_MISMATCH": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "DUPLICATE_PAYMENT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NAME_NOISE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NO_CANDIDATE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "OVERPAYMENT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_DECLARED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 3
+      },
+      "PARTIAL_SILENT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PREDATED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "REVERSAL": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "ROUNDING_FX": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 3
+      },
+      "TRANSPOSED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "WRONG_REF_CONFLICT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      }
+    },
+    "policy": "reckless",
+    "total_payments": 60,
+    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+  },
+  {
+    "corpus": "dev",
+    "corpus_seed": 20260828,
+    "cost": {
+      "llm_calls": 0,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0,
+      "steps_used": 432,
+      "wall_seconds": 0.024
+    },
+    "cost_model": {
+      "CORRECT_ABSTAIN": 15,
+      "CORRECT_MATCH": 100,
+      "OVER_ESCALATION": -30,
+      "UNSAFE_MATCH": -2500,
+      "WRONG_AMOUNT": -400,
+      "WRONG_INVOICE": -2500
+    },
+    "counts": {
+      "CORRECT_ABSTAIN": 33,
+      "CORRECT_MATCH": 15,
+      "OVER_ESCALATION": 12,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "failures": [
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0027:3826286}",
+        "expected": "MATCH",
+        "hazard": "BANK_FEE",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0004"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0028:955431}",
+        "expected": "MATCH",
+        "hazard": "ROUNDING_FX",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0005"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0031:269574, DEV-INV0032:517172, DEV-INV0033:471451}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0008"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0036:793944}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0010"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0053:525414}",
+        "expected": "MATCH",
+        "hazard": "BANK_FEE",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0024"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0054:4227272}",
+        "expected": "MATCH",
+        "hazard": "ROUNDING_FX",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0025"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0057:642947, DEV-INV0058:870005, DEV-INV0059:265128}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0028"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0062:641090}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0030"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0079:85032}",
+        "expected": "MATCH",
+        "hazard": "BANK_FEE",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0044"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0080:4024614}",
+        "expected": "MATCH",
+        "hazard": "ROUNDING_FX",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0045"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0083:872800, DEV-INV0084:333755, DEV-INV0085:259187}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0048"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0088:552732}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0050"
+      }
+    ],
+    "headline": {
+      "abstain_precision": 0.7333,
+      "abstain_recall": 1.0,
+      "automation_precision": 1.0,
+      "coverage": 0.25,
+      "exact_accuracy": 0.8,
+      "false_pay_count": 0,
+      "false_pay_rate": 0.0,
+      "net_value": 1635
+    },
+    "ledger_blocks": {},
+    "per_hazard": {
+      "ALREADY_SETTLED": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "AMBIGUOUS_TWIN": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "BANK_FEE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 3,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CLEAN_EXACT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_AMBIGUOUS": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 3,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CREDIT_NOTE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CROSS_VENDOR_TRAP": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CURRENCY_MISMATCH": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "DUPLICATE_PAYMENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NAME_NOISE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NO_CANDIDATE": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "OVERPAYMENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_DECLARED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 3,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_SILENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PREDATED": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "REVERSAL": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "ROUNDING_FX": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 3,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "TRANSPOSED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "WRONG_REF_CONFLICT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      }
+    },
+    "policy": "reckless+gate",
+    "total_payments": 60,
+    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+  },
+  {
+    "corpus": "dev",
+    "corpus_seed": 20260828,
+    "cost": {
+      "llm_calls": 0,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0,
+      "steps_used": 162,
+      "wall_seconds": 0.016
+    },
+    "cost_model": {
+      "CORRECT_ABSTAIN": 15,
+      "CORRECT_MATCH": 100,
+      "OVER_ESCALATION": -30,
+      "UNSAFE_MATCH": -2500,
+      "WRONG_AMOUNT": -400,
+      "WRONG_INVOICE": -2500
+    },
+    "counts": {
+      "CORRECT_ABSTAIN": 11,
+      "CORRECT_MATCH": 19,
+      "OVER_ESCALATION": 6,
+      "UNSAFE_MATCH": 22,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 2
+    },
+    "failures": [
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0025:218697} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "DUPLICATE_PAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0002"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0031:269574, DEV-INV0032:517172, DEV-INV0033:471451}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0008"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0036:793944}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0010"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0042:755156} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "AMBIGUOUS_TWIN",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0013"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0045:539398} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "WRONG_REF_CONFLICT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0014"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0046:873468} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0015"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0047:216202} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "ALREADY_SETTLED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0016"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0049:472826} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "OVERPAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0018"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0050:853780} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0019"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0058:913278} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "NO_CANDIDATE",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0020"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0051:4762743} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "DUPLICATE_PAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0022"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0053'], posted ['DEV-INV0045']",
+        "expected": "MATCH",
+        "hazard": "BANK_FEE",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0024"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0057:642947, DEV-INV0058:870005, DEV-INV0059:265128}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0028"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0062:641090}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0030"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0068:74151} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "AMBIGUOUS_TWIN",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0033"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0071:665407} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "WRONG_REF_CONFLICT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0034"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0072:482025} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0035"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0073:308918} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "ALREADY_SETTLED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0036"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0075:88331} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "OVERPAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0038"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0076:643063} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0039"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0077:1753672} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "DUPLICATE_PAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0042"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "expected ['DEV-INV0080'], posted ['DEV-INV0011']",
+        "expected": "MATCH",
+        "hazard": "ROUNDING_FX",
+        "outcome": "WRONG_INVOICE",
+        "payment_id": "DEV-PAY0045"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0083:872800, DEV-INV0084:333755, DEV-INV0085:259187}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0048"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0088:552732}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0050"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0094:568450} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "AMBIGUOUS_TWIN",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0053"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0097:380954} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "WRONG_REF_CONFLICT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0054"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0098:150213} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0055"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0099:207700} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "ALREADY_SETTLED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0056"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0101:422667} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "OVERPAYMENT",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0058"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0102:370999} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0059"
+      }
+    ],
+    "headline": {
+      "abstain_precision": 0.6471,
+      "abstain_recall": 0.3333,
+      "automation_precision": 0.4419,
+      "coverage": 0.7167,
+      "exact_accuracy": 0.5,
+      "false_pay_count": 24,
+      "false_pay_rate": 0.4,
+      "net_value": -58115
+    },
+    "ledger_blocks": {
+      "REJECTED_CURRENCY_MISMATCH": 3,
+      "REJECTED_DUPLICATE_PAYMENT": 3,
+      "REJECTED_OVERAPPLICATION": 9
+    },
+    "per_hazard": {
+      "ALREADY_SETTLED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "AMBIGUOUS_TWIN": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "BANK_FEE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 2,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 1
+      },
+      "CLEAN_EXACT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_AMBIGUOUS": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 3,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CREDIT_NOTE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CROSS_VENDOR_TRAP": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CURRENCY_MISMATCH": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "DUPLICATE_PAYMENT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NAME_NOISE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NO_CANDIDATE": {
+        "CORRECT_ABSTAIN": 2,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 1,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "OVERPAYMENT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_DECLARED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 3,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_SILENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PREDATED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "REVERSAL": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "ROUNDING_FX": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 2,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 1
+      },
+      "TRANSPOSED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "WRONG_REF_CONFLICT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      }
+    },
+    "policy": "baseline",
+    "total_payments": 60,
+    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+  },
+  {
+    "corpus": "dev",
+    "corpus_seed": 20260828,
+    "cost": {
+      "llm_calls": 0,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0,
+      "steps_used": 490,
+      "wall_seconds": 0.09
+    },
+    "cost_model": {
+      "CORRECT_ABSTAIN": 15,
+      "CORRECT_MATCH": 100,
+      "OVER_ESCALATION": -30,
+      "UNSAFE_MATCH": -2500,
+      "WRONG_AMOUNT": -400,
+      "WRONG_INVOICE": -2500
+    },
+    "counts": {
+      "CORRECT_ABSTAIN": 33,
+      "CORRECT_MATCH": 19,
+      "OVER_ESCALATION": 8,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "failures": [
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0031:269574, DEV-INV0032:517172, DEV-INV0033:471451}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0008"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0036:793944}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0010"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0053:525414}",
+        "expected": "MATCH",
+        "hazard": "BANK_FEE",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0024"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0057:642947, DEV-INV0058:870005, DEV-INV0059:265128}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0028"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0062:641090}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0030"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0080:4024614}",
+        "expected": "MATCH",
+        "hazard": "ROUNDING_FX",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0045"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0083:872800, DEV-INV0084:333755, DEV-INV0085:259187}",
+        "expected": "MATCH",
+        "hazard": "CONSOLIDATED_REF",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0048"
+      },
+      {
+        "actual": "ABSTAIN",
+        "detail": "a human must now resolve {DEV-INV0088:552732}",
+        "expected": "MATCH",
+        "hazard": "PARTIAL_DECLARED",
+        "outcome": "OVER_ESCALATION",
+        "payment_id": "DEV-PAY0050"
+      }
+    ],
+    "headline": {
+      "abstain_precision": 0.8049,
+      "abstain_recall": 1.0,
+      "automation_precision": 1.0,
+      "coverage": 0.3167,
+      "exact_accuracy": 0.8667,
+      "false_pay_count": 0,
+      "false_pay_rate": 0.0,
+      "net_value": 2155
+    },
+    "ledger_blocks": {},
+    "per_hazard": {
+      "ALREADY_SETTLED": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "AMBIGUOUS_TWIN": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "BANK_FEE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 2,
+        "OVER_ESCALATION": 1,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CLEAN_EXACT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_AMBIGUOUS": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 3,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CREDIT_NOTE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CROSS_VENDOR_TRAP": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CURRENCY_MISMATCH": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "DUPLICATE_PAYMENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NAME_NOISE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NO_CANDIDATE": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "OVERPAYMENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_DECLARED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 3,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_SILENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PREDATED": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "REVERSAL": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "ROUNDING_FX": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 2,
+        "OVER_ESCALATION": 1,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "TRANSPOSED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "WRONG_REF_CONFLICT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      }
+    },
+    "policy": "baseline+gate",
+    "total_payments": 60,
+    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+  },
+  {
+    "corpus": "dev",
+    "corpus_seed": 20260828,
+    "cost": {
+      "llm_calls": 0,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0,
+      "steps_used": 282,
+      "wall_seconds": 0.032
+    },
+    "cost_model": {
+      "CORRECT_ABSTAIN": 15,
+      "CORRECT_MATCH": 100,
+      "OVER_ESCALATION": -30,
+      "UNSAFE_MATCH": -2500,
+      "WRONG_AMOUNT": -400,
+      "WRONG_INVOICE": -2500
+    },
+    "counts": {
+      "CORRECT_ABSTAIN": 27,
+      "CORRECT_MATCH": 27,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 6,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "failures": [
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0046:873468} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0015"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0050:853780} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0019"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0072:482025} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0035"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0076:643063} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0039"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0098:150213} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "CURRENCY_MISMATCH",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0055"
+      },
+      {
+        "actual": "MATCH",
+        "detail": "posted {DEV-INV0102:370999} where no allocation is justifiable",
+        "expected": "ABSTAIN",
+        "hazard": "PREDATED",
+        "outcome": "UNSAFE_MATCH",
+        "payment_id": "DEV-PAY0059"
+      }
+    ],
+    "headline": {
+      "abstain_precision": 1.0,
+      "abstain_recall": 0.8182,
+      "automation_precision": 0.8182,
+      "coverage": 0.55,
+      "exact_accuracy": 0.9,
+      "false_pay_count": 6,
+      "false_pay_rate": 0.1,
+      "net_value": -11895
+    },
+    "ledger_blocks": {
+      "REJECTED_CURRENCY_MISMATCH": 3
+    },
+    "per_hazard": {
+      "ALREADY_SETTLED": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "AMBIGUOUS_TWIN": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "BANK_FEE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CLEAN_EXACT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_AMBIGUOUS": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CREDIT_NOTE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CROSS_VENDOR_TRAP": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CURRENCY_MISMATCH": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "DUPLICATE_PAYMENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NAME_NOISE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NO_CANDIDATE": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "OVERPAYMENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_DECLARED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_SILENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PREDATED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 3,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "REVERSAL": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "ROUNDING_FX": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "TRANSPOSED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "WRONG_REF_CONFLICT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      }
+    },
+    "policy": "rules-only",
+    "total_payments": 60,
+    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+  },
+  {
+    "corpus": "dev",
+    "corpus_seed": 20260828,
+    "cost": {
+      "llm_calls": 0,
+      "llm_input_tokens": 0,
+      "llm_output_tokens": 0,
+      "steps_used": 324,
+      "wall_seconds": 0.019
+    },
+    "cost_model": {
+      "CORRECT_ABSTAIN": 15,
+      "CORRECT_MATCH": 100,
+      "OVER_ESCALATION": -30,
+      "UNSAFE_MATCH": -2500,
+      "WRONG_AMOUNT": -400,
+      "WRONG_INVOICE": -2500
+    },
+    "counts": {
+      "CORRECT_ABSTAIN": 33,
+      "CORRECT_MATCH": 27,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "failures": [],
+    "headline": {
+      "abstain_precision": 1.0,
+      "abstain_recall": 1.0,
+      "automation_precision": 1.0,
+      "coverage": 0.45,
+      "exact_accuracy": 1.0,
+      "false_pay_count": 0,
+      "false_pay_rate": 0.0,
+      "net_value": 3195
+    },
+    "ledger_blocks": {},
+    "per_hazard": {
+      "ALREADY_SETTLED": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "AMBIGUOUS_TWIN": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "BANK_FEE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CLEAN_EXACT": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_AMBIGUOUS": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CONSOLIDATED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CREDIT_NOTE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CROSS_VENDOR_TRAP": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "CURRENCY_MISMATCH": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "DUPLICATE_PAYMENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NAME_NOISE": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "NO_CANDIDATE": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "OVERPAYMENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_DECLARED": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PARTIAL_SILENT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "PREDATED": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "REVERSAL": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "ROUNDING_FX": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "TRANSPOSED_REF": {
+        "CORRECT_ABSTAIN": 0,
+        "CORRECT_MATCH": 3,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      },
+      "WRONG_REF_CONFLICT": {
+        "CORRECT_ABSTAIN": 3,
+        "CORRECT_MATCH": 0,
+        "OVER_ESCALATION": 0,
+        "UNSAFE_MATCH": 0,
+        "WRONG_AMOUNT": 0,
+        "WRONG_INVOICE": 0
+      }
+    },
+    "policy": "guarded",
+    "total_payments": 60,
+    "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+  }
+]

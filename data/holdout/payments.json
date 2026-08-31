@@ -1,0 +1,542 @@
+[
+  {
+    "amount_cents": 685150,
+    "bank_reference": "HLD-BNK-000001",
+    "counterparty_raw": "ACME MFG",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60175",
+    "payment_id": "HLD-PAY0001",
+    "value_date": "2026-07-02"
+  },
+  {
+    "amount_cents": 685150,
+    "bank_reference": "HLD-BNK-000001",
+    "counterparty_raw": "ACME MFG",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60175",
+    "payment_id": "HLD-PAY0002",
+    "value_date": "2026-07-02"
+  },
+  {
+    "amount_cents": 2309708,
+    "bank_reference": "HLD-BNK-000002",
+    "counterparty_raw": "Borealis Log.",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0003",
+    "value_date": "2026-07-09"
+  },
+  {
+    "amount_cents": 2937673,
+    "bank_reference": "HLD-BNK-000003",
+    "counterparty_raw": "CEDAR PRINT WKS",
+    "currency": "USD",
+    "memo": "INV-2026-60189 LESS CORRESPONDENT BANK FEE",
+    "payment_id": "HLD-PAY0004",
+    "value_date": "2026-07-20"
+  },
+  {
+    "amount_cents": 4429109,
+    "bank_reference": "HLD-BNK-000004",
+    "counterparty_raw": "DELTA INSTRUMENT CO",
+    "currency": "USD",
+    "memo": "REF INV-2026-60196",
+    "payment_id": "HLD-PAY0005",
+    "value_date": "2026-07-07"
+  },
+  {
+    "amount_cents": 4436365,
+    "bank_reference": "HLD-BNK-000005",
+    "counterparty_raw": "EVERLINE TEX",
+    "currency": "USD",
+    "memo": "INVOICE INV-2026-06203",
+    "payment_id": "HLD-PAY0006",
+    "value_date": "2026-06-15"
+  },
+  {
+    "amount_cents": 573027,
+    "bank_reference": "HLD-BNK-000006",
+    "counterparty_raw": "FOXBRIDGE CHEMICALS",
+    "currency": "USD",
+    "memo": "INV-2026-60210 NET OF CREDIT NOTE",
+    "payment_id": "HLD-PAY0007",
+    "value_date": "2026-07-29"
+  },
+  {
+    "amount_cents": 1874709,
+    "bank_reference": "HLD-BNK-000007",
+    "counterparty_raw": "Granite Fastener Co",
+    "currency": "USD",
+    "memo": "SETTLEMENT INV-2026-60217 INV-2026-60224 INV-2026-60231",
+    "payment_id": "HLD-PAY0008",
+    "value_date": "2026-07-03"
+  },
+  {
+    "amount_cents": 801563,
+    "bank_reference": "HLD-BNK-000008",
+    "counterparty_raw": "HARBORVIEW PACKAGING",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0009",
+    "value_date": "2026-07-19"
+  },
+  {
+    "amount_cents": 500747,
+    "bank_reference": "HLD-BNK-000009",
+    "counterparty_raw": "JUNIPER",
+    "currency": "USD",
+    "memo": "DEPOSIT 40PCT INV-2026-60252 PART 1 OF 2",
+    "payment_id": "HLD-PAY0010",
+    "value_date": "2026-07-04"
+  },
+  {
+    "amount_cents": 913049,
+    "bank_reference": "HLD-BNK-000010",
+    "counterparty_raw": "KESTREL MACHINING",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0011",
+    "value_date": "2026-07-05"
+  },
+  {
+    "amount_cents": 524649,
+    "bank_reference": "HLD-BNK-000011",
+    "counterparty_raw": "LARKSPUR SUPPLIES",
+    "currency": "USD",
+    "memo": "BULK SETTLEMENT",
+    "payment_id": "HLD-PAY0012",
+    "value_date": "2026-07-17"
+  },
+  {
+    "amount_cents": 212445,
+    "bank_reference": "HLD-BNK-000012",
+    "counterparty_raw": "CEDAR PRINT WORKS",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0013",
+    "value_date": "2026-07-11"
+  },
+  {
+    "amount_cents": 155950,
+    "bank_reference": "HLD-BNK-000013",
+    "counterparty_raw": "DELTA INST",
+    "currency": "USD",
+    "memo": "PAYMENT FOR INV-2026-60308",
+    "payment_id": "HLD-PAY0014",
+    "value_date": "2026-06-23"
+  },
+  {
+    "amount_cents": 884310,
+    "bank_reference": "HLD-BNK-000014",
+    "counterparty_raw": "EVERLINE TEXTILES",
+    "currency": "EUR",
+    "memo": "SEPA INV-2026-60322",
+    "payment_id": "HLD-PAY0015",
+    "value_date": "2026-07-01"
+  },
+  {
+    "amount_cents": 683721,
+    "bank_reference": "HLD-BNK-000015",
+    "counterparty_raw": "FOXBRIDGE CHEMICAL LTD",
+    "currency": "USD",
+    "memo": "REMITTANCE INV-2026-60329",
+    "payment_id": "HLD-PAY0016",
+    "value_date": "2026-07-16"
+  },
+  {
+    "amount_cents": -127769,
+    "bank_reference": "HLD-BNK-000016",
+    "counterparty_raw": "Granite Fastener Co",
+    "currency": "USD",
+    "memo": "RETURN OF FUNDS REVERSAL INV-2026-60336",
+    "payment_id": "HLD-PAY0017",
+    "value_date": "2026-06-28"
+  },
+  {
+    "amount_cents": 745281,
+    "bank_reference": "HLD-BNK-000017",
+    "counterparty_raw": "HARBORVIEW PACK LTD",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60343",
+    "payment_id": "HLD-PAY0018",
+    "value_date": "2026-06-29"
+  },
+  {
+    "amount_cents": 571069,
+    "bank_reference": "HLD-BNK-000018",
+    "counterparty_raw": "Ionvale Elec",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60350",
+    "payment_id": "HLD-PAY0019",
+    "value_date": "2026-06-06"
+  },
+  {
+    "amount_cents": 789721,
+    "bank_reference": "HLD-BNK-000019",
+    "counterparty_raw": "NORTHWIND TRADING CO",
+    "currency": "USD",
+    "memo": "INCOMING WIRE",
+    "payment_id": "HLD-PAY0020",
+    "value_date": "2026-05-26"
+  },
+  {
+    "amount_cents": 2213859,
+    "bank_reference": "HLD-BNK-000020",
+    "counterparty_raw": "Borealis Log.",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60357",
+    "payment_id": "HLD-PAY0021",
+    "value_date": "2026-07-17"
+  },
+  {
+    "amount_cents": 2213859,
+    "bank_reference": "HLD-BNK-000020",
+    "counterparty_raw": "Borealis Log.",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60357",
+    "payment_id": "HLD-PAY0022",
+    "value_date": "2026-07-17"
+  },
+  {
+    "amount_cents": 1317964,
+    "bank_reference": "HLD-BNK-000021",
+    "counterparty_raw": "CEDARPRINT",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0023",
+    "value_date": "2026-07-22"
+  },
+  {
+    "amount_cents": 3701401,
+    "bank_reference": "HLD-BNK-000022",
+    "counterparty_raw": "DELTA INSTRUMENT CO",
+    "currency": "USD",
+    "memo": "INV-2026-60371 LESS CORRESPONDENT BANK FEE",
+    "payment_id": "HLD-PAY0024",
+    "value_date": "2026-07-13"
+  },
+  {
+    "amount_cents": 1974267,
+    "bank_reference": "HLD-BNK-000023",
+    "counterparty_raw": "EVERLINE",
+    "currency": "USD",
+    "memo": "REF INV-2026-60378",
+    "payment_id": "HLD-PAY0025",
+    "value_date": "2026-07-12"
+  },
+  {
+    "amount_cents": 4518291,
+    "bank_reference": "HLD-BNK-000024",
+    "counterparty_raw": "FOXBRIDGE",
+    "currency": "USD",
+    "memo": "INVOICE INV-2026-06385",
+    "payment_id": "HLD-PAY0026",
+    "value_date": "2026-06-27"
+  },
+  {
+    "amount_cents": 2738365,
+    "bank_reference": "HLD-BNK-000025",
+    "counterparty_raw": "GRANITE FSTNRS",
+    "currency": "USD",
+    "memo": "INV-2026-60392 NET OF CREDIT NOTE",
+    "payment_id": "HLD-PAY0027",
+    "value_date": "2026-06-23"
+  },
+  {
+    "amount_cents": 1546030,
+    "bank_reference": "HLD-BNK-000026",
+    "counterparty_raw": "HARBORVIEW PACK LTD",
+    "currency": "USD",
+    "memo": "SETTLEMENT INV-2026-60399 INV-2026-60406 INV-2026-60413",
+    "payment_id": "HLD-PAY0028",
+    "value_date": "2026-06-26"
+  },
+  {
+    "amount_cents": 840017,
+    "bank_reference": "HLD-BNK-000027",
+    "counterparty_raw": "IONVALE ELECTRONIC SA",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0029",
+    "value_date": "2026-07-03"
+  },
+  {
+    "amount_cents": 158228,
+    "bank_reference": "HLD-BNK-000028",
+    "counterparty_raw": "KESTREL MACHINING GMBH",
+    "currency": "USD",
+    "memo": "DEPOSIT 40PCT INV-2026-60434 PART 1 OF 2",
+    "payment_id": "HLD-PAY0030",
+    "value_date": "2026-07-31"
+  },
+  {
+    "amount_cents": 481823,
+    "bank_reference": "HLD-BNK-000029",
+    "counterparty_raw": "LARKSPUR SUPPLIES LTD",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0031",
+    "value_date": "2026-07-31"
+  },
+  {
+    "amount_cents": 510804,
+    "bank_reference": "HLD-BNK-000030",
+    "counterparty_raw": "Acme Mfg Ltd",
+    "currency": "USD",
+    "memo": "BULK SETTLEMENT",
+    "payment_id": "HLD-PAY0032",
+    "value_date": "2026-06-18"
+  },
+  {
+    "amount_cents": 692795,
+    "bank_reference": "HLD-BNK-000031",
+    "counterparty_raw": "Delta Instr Inc",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0033",
+    "value_date": "2026-06-16"
+  },
+  {
+    "amount_cents": 664497,
+    "bank_reference": "HLD-BNK-000032",
+    "counterparty_raw": "EVERLINE TEX",
+    "currency": "USD",
+    "memo": "PAYMENT FOR INV-2026-60490",
+    "payment_id": "HLD-PAY0034",
+    "value_date": "2026-07-25"
+  },
+  {
+    "amount_cents": 1123900,
+    "bank_reference": "HLD-BNK-000033",
+    "counterparty_raw": "FOXBRIDGE",
+    "currency": "EUR",
+    "memo": "SEPA INV-2026-60504",
+    "payment_id": "HLD-PAY0035",
+    "value_date": "2026-08-05"
+  },
+  {
+    "amount_cents": 277263,
+    "bank_reference": "HLD-BNK-000034",
+    "counterparty_raw": "GRANITE",
+    "currency": "USD",
+    "memo": "REMITTANCE INV-2026-60511",
+    "payment_id": "HLD-PAY0036",
+    "value_date": "2026-06-21"
+  },
+  {
+    "amount_cents": -674601,
+    "bank_reference": "HLD-BNK-000035",
+    "counterparty_raw": "HARBORVIEW",
+    "currency": "USD",
+    "memo": "RETURN OF FUNDS REVERSAL INV-2026-60518",
+    "payment_id": "HLD-PAY0037",
+    "value_date": "2026-07-16"
+  },
+  {
+    "amount_cents": 321132,
+    "bank_reference": "HLD-BNK-000036",
+    "counterparty_raw": "IONVALE ELECTRONICS",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60525",
+    "payment_id": "HLD-PAY0038",
+    "value_date": "2026-07-08"
+  },
+  {
+    "amount_cents": 509371,
+    "bank_reference": "HLD-BNK-000037",
+    "counterparty_raw": "Juniper Analytic",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60532",
+    "payment_id": "HLD-PAY0039",
+    "value_date": "2026-06-01"
+  },
+  {
+    "amount_cents": 286002,
+    "bank_reference": "HLD-BNK-000038",
+    "counterparty_raw": "PELICAN BAY HOLDINGS",
+    "currency": "USD",
+    "memo": "INCOMING WIRE",
+    "payment_id": "HLD-PAY0040",
+    "value_date": "2026-06-02"
+  },
+  {
+    "amount_cents": 538939,
+    "bank_reference": "HLD-BNK-000039",
+    "counterparty_raw": "CEDARPRINT",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60539",
+    "payment_id": "HLD-PAY0041",
+    "value_date": "2026-06-24"
+  },
+  {
+    "amount_cents": 538939,
+    "bank_reference": "HLD-BNK-000039",
+    "counterparty_raw": "CEDARPRINT",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60539",
+    "payment_id": "HLD-PAY0042",
+    "value_date": "2026-06-24"
+  },
+  {
+    "amount_cents": 1007225,
+    "bank_reference": "HLD-BNK-000040",
+    "counterparty_raw": "Delta Instr Inc",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0043",
+    "value_date": "2026-06-09"
+  },
+  {
+    "amount_cents": 1525788,
+    "bank_reference": "HLD-BNK-000041",
+    "counterparty_raw": "Everline Textile Co",
+    "currency": "USD",
+    "memo": "INV-2026-60553 LESS CORRESPONDENT BANK FEE",
+    "payment_id": "HLD-PAY0044",
+    "value_date": "2026-06-21"
+  },
+  {
+    "amount_cents": 3876895,
+    "bank_reference": "HLD-BNK-000042",
+    "counterparty_raw": "Foxbridge Chem",
+    "currency": "USD",
+    "memo": "REF INV-2026-60560",
+    "payment_id": "HLD-PAY0045",
+    "value_date": "2026-07-01"
+  },
+  {
+    "amount_cents": 2584736,
+    "bank_reference": "HLD-BNK-000043",
+    "counterparty_raw": "GRANITE FSTNRS",
+    "currency": "USD",
+    "memo": "INVOICE INV-2026-06567",
+    "payment_id": "HLD-PAY0046",
+    "value_date": "2026-06-21"
+  },
+  {
+    "amount_cents": 4504138,
+    "bank_reference": "HLD-BNK-000044",
+    "counterparty_raw": "HARBORVIEW PACK LTD",
+    "currency": "USD",
+    "memo": "INV-2026-60574 NET OF CREDIT NOTE",
+    "payment_id": "HLD-PAY0047",
+    "value_date": "2026-06-01"
+  },
+  {
+    "amount_cents": 1176830,
+    "bank_reference": "HLD-BNK-000045",
+    "counterparty_raw": "IONVALE ELECTRONIC SA",
+    "currency": "USD",
+    "memo": "SETTLEMENT INV-2026-60581 INV-2026-60588 INV-2026-60595",
+    "payment_id": "HLD-PAY0048",
+    "value_date": "2026-07-29"
+  },
+  {
+    "amount_cents": 448951,
+    "bank_reference": "HLD-BNK-000046",
+    "counterparty_raw": "JUNIPER ANALYTICS",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0049",
+    "value_date": "2026-07-17"
+  },
+  {
+    "amount_cents": 223842,
+    "bank_reference": "HLD-BNK-000047",
+    "counterparty_raw": "LARKSPUR SUPPLIES",
+    "currency": "USD",
+    "memo": "DEPOSIT 40PCT INV-2026-60616 PART 1 OF 2",
+    "payment_id": "HLD-PAY0050",
+    "value_date": "2026-08-02"
+  },
+  {
+    "amount_cents": 486192,
+    "bank_reference": "HLD-BNK-000048",
+    "counterparty_raw": "Acme Mfg Ltd",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0051",
+    "value_date": "2026-07-02"
+  },
+  {
+    "amount_cents": 389566,
+    "bank_reference": "HLD-BNK-000049",
+    "counterparty_raw": "BOREALIS LOGISTICS",
+    "currency": "USD",
+    "memo": "BULK SETTLEMENT",
+    "payment_id": "HLD-PAY0052",
+    "value_date": "2026-08-07"
+  },
+  {
+    "amount_cents": 332747,
+    "bank_reference": "HLD-BNK-000050",
+    "counterparty_raw": "EVERLINE",
+    "currency": "USD",
+    "memo": "ACH CREDIT",
+    "payment_id": "HLD-PAY0053",
+    "value_date": "2026-06-13"
+  },
+  {
+    "amount_cents": 250577,
+    "bank_reference": "HLD-BNK-000051",
+    "counterparty_raw": "FOXBRIDGE CHEMICALS",
+    "currency": "USD",
+    "memo": "PAYMENT FOR INV-2026-60672",
+    "payment_id": "HLD-PAY0054",
+    "value_date": "2026-07-24"
+  },
+  {
+    "amount_cents": 758912,
+    "bank_reference": "HLD-BNK-000052",
+    "counterparty_raw": "GRANITE",
+    "currency": "EUR",
+    "memo": "SEPA INV-2026-60686",
+    "payment_id": "HLD-PAY0055",
+    "value_date": "2026-07-15"
+  },
+  {
+    "amount_cents": 468415,
+    "bank_reference": "HLD-BNK-000053",
+    "counterparty_raw": "HARBORVIEW PACK LTD",
+    "currency": "USD",
+    "memo": "REMITTANCE INV-2026-60693",
+    "payment_id": "HLD-PAY0056",
+    "value_date": "2026-07-10"
+  },
+  {
+    "amount_cents": -788468,
+    "bank_reference": "HLD-BNK-000054",
+    "counterparty_raw": "IONVALE",
+    "currency": "USD",
+    "memo": "RETURN OF FUNDS REVERSAL INV-2026-60700",
+    "payment_id": "HLD-PAY0057",
+    "value_date": "2026-07-09"
+  },
+  {
+    "amount_cents": 170181,
+    "bank_reference": "HLD-BNK-000055",
+    "counterparty_raw": "Juniper Analytic",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60707",
+    "payment_id": "HLD-PAY0058",
+    "value_date": "2026-06-29"
+  },
+  {
+    "amount_cents": 438911,
+    "bank_reference": "HLD-BNK-000056",
+    "counterparty_raw": "KESTREL MACHINING GMBH",
+    "currency": "USD",
+    "memo": "PAYMENT INV-2026-60714",
+    "payment_id": "HLD-PAY0059",
+    "value_date": "2026-05-26"
+  },
+  {
+    "amount_cents": 1340282,
+    "bank_reference": "HLD-BNK-000057",
+    "counterparty_raw": "QUARRY LANE SERVICES",
+    "currency": "USD",
+    "memo": "INCOMING WIRE",
+    "payment_id": "HLD-PAY0060",
+    "value_date": "2026-05-30"
+  }
+]

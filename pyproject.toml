@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ledgergate"
+version = "1.0.0"
+description = "A safety gate for agentic cash application, and the evaluation that measures it"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+# Intentionally empty. LedgerGate runs on the standard library alone, including
+# the HTTP client that talks to the model provider. A reviewer in a clean
+# container cannot be blocked by a wheel that has not been built for their
+# interpreter, and there is no dependency that can drift underneath a published
+# number.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1"]
+
+[project.scripts]
+ledgergate = "ledgergate.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]
+addopts = "-q --strict-markers"

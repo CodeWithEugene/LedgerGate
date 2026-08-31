@@ -1,0 +1,581 @@
+[
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 685150,
+        "invoice_id": "HLD-INV0025"
+      }
+    ],
+    "hazard": "CLEAN_EXACT",
+    "note": "reference, vendor and amount all agree",
+    "payment_id": "HLD-PAY0001"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "DUPLICATE_PAYMENT",
+    "note": "bank_reference already ingested; re-applying would double-pay",
+    "payment_id": "HLD-PAY0002"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 2309708,
+        "invoice_id": "HLD-INV0026"
+      }
+    ],
+    "hazard": "NAME_NOISE",
+    "note": "amount is unique to one open invoice for this vendor",
+    "payment_id": "HLD-PAY0003"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 2937673,
+        "invoice_id": "HLD-INV0027"
+      }
+    ],
+    "hazard": "BANK_FEE",
+    "note": "memo names the invoice and explains the shortfall; apply cash received",
+    "payment_id": "HLD-PAY0004"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4429109,
+        "invoice_id": "HLD-INV0028"
+      }
+    ],
+    "hazard": "ROUNDING_FX",
+    "note": "sub-cent rounding on the sending side; within tolerance",
+    "payment_id": "HLD-PAY0005"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4436365,
+        "invoice_id": "HLD-INV0029"
+      }
+    ],
+    "hazard": "TRANSPOSED_REF",
+    "note": "cited reference does not exist; amount and vendor identify one invoice",
+    "payment_id": "HLD-PAY0006"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 573027,
+        "invoice_id": "HLD-INV0030"
+      }
+    ],
+    "hazard": "CREDIT_NOTE",
+    "note": "payment equals invoice less the recorded credit note",
+    "payment_id": "HLD-PAY0007"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 697586,
+        "invoice_id": "HLD-INV0031"
+      },
+      {
+        "amount_cents": 282106,
+        "invoice_id": "HLD-INV0032"
+      },
+      {
+        "amount_cents": 895017,
+        "invoice_id": "HLD-INV0033"
+      }
+    ],
+    "hazard": "CONSOLIDATED_REF",
+    "note": "memo enumerates every invoice and the total reconciles exactly",
+    "payment_id": "HLD-PAY0008"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 801563,
+        "invoice_id": "HLD-INV0034"
+      }
+    ],
+    "hazard": "CROSS_VENDOR_TRAP",
+    "note": "amount also matches HLD-INV0035; counterparty resolves the tie",
+    "payment_id": "HLD-PAY0009"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 500747,
+        "invoice_id": "HLD-INV0036"
+      }
+    ],
+    "hazard": "PARTIAL_DECLARED",
+    "note": "explicit part payment against a named invoice",
+    "payment_id": "HLD-PAY0010"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PARTIAL_SILENT",
+    "note": "indistinguishable from a payment for work not yet invoiced",
+    "payment_id": "HLD-PAY0011"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CONSOLIDATED_AMBIGUOUS",
+    "note": "HLD-INV0038+HLD-INV0039 and HLD-INV0040+HLD-INV0041 both total exactly this",
+    "payment_id": "HLD-PAY0012"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "AMBIGUOUS_TWIN",
+    "note": "HLD-INV0042 and HLD-INV0043 are indistinguishable on this evidence",
+    "payment_id": "HLD-PAY0013"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "WRONG_REF_CONFLICT",
+    "note": "memo cites HLD-INV0044 but the amount is HLD-INV0045's; evidence conflicts",
+    "payment_id": "HLD-PAY0014"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CURRENCY_MISMATCH",
+    "note": "invoice is USD, payment is EUR, and no FX rate source is configured",
+    "payment_id": "HLD-PAY0015"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "ALREADY_SETTLED",
+    "note": "invoice carries no outstanding balance; paying again is a loss",
+    "payment_id": "HLD-PAY0016"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "REVERSAL",
+    "note": "the written procedure does not define reversal handling",
+    "payment_id": "HLD-PAY0017"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "OVERPAYMENT",
+    "note": "the procedure does not define what happens to the residual credit",
+    "payment_id": "HLD-PAY0018"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PREDATED",
+    "note": "value date precedes the invoice issue date; the reference cannot be trusted",
+    "payment_id": "HLD-PAY0019"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "NO_CANDIDATE",
+    "note": "counterparty is not a known vendor and no invoice fits",
+    "payment_id": "HLD-PAY0020"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 2213859,
+        "invoice_id": "HLD-INV0051"
+      }
+    ],
+    "hazard": "CLEAN_EXACT",
+    "note": "reference, vendor and amount all agree",
+    "payment_id": "HLD-PAY0021"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "DUPLICATE_PAYMENT",
+    "note": "bank_reference already ingested; re-applying would double-pay",
+    "payment_id": "HLD-PAY0022"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 1317964,
+        "invoice_id": "HLD-INV0052"
+      }
+    ],
+    "hazard": "NAME_NOISE",
+    "note": "amount is unique to one open invoice for this vendor",
+    "payment_id": "HLD-PAY0023"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 3701401,
+        "invoice_id": "HLD-INV0053"
+      }
+    ],
+    "hazard": "BANK_FEE",
+    "note": "memo names the invoice and explains the shortfall; apply cash received",
+    "payment_id": "HLD-PAY0024"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 1974267,
+        "invoice_id": "HLD-INV0054"
+      }
+    ],
+    "hazard": "ROUNDING_FX",
+    "note": "sub-cent rounding on the sending side; within tolerance",
+    "payment_id": "HLD-PAY0025"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4518291,
+        "invoice_id": "HLD-INV0055"
+      }
+    ],
+    "hazard": "TRANSPOSED_REF",
+    "note": "cited reference does not exist; amount and vendor identify one invoice",
+    "payment_id": "HLD-PAY0026"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 2738365,
+        "invoice_id": "HLD-INV0056"
+      }
+    ],
+    "hazard": "CREDIT_NOTE",
+    "note": "payment equals invoice less the recorded credit note",
+    "payment_id": "HLD-PAY0027"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 834866,
+        "invoice_id": "HLD-INV0057"
+      },
+      {
+        "amount_cents": 673003,
+        "invoice_id": "HLD-INV0058"
+      },
+      {
+        "amount_cents": 38161,
+        "invoice_id": "HLD-INV0059"
+      }
+    ],
+    "hazard": "CONSOLIDATED_REF",
+    "note": "memo enumerates every invoice and the total reconciles exactly",
+    "payment_id": "HLD-PAY0028"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 840017,
+        "invoice_id": "HLD-INV0060"
+      }
+    ],
+    "hazard": "CROSS_VENDOR_TRAP",
+    "note": "amount also matches HLD-INV0061; counterparty resolves the tie",
+    "payment_id": "HLD-PAY0029"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 158228,
+        "invoice_id": "HLD-INV0062"
+      }
+    ],
+    "hazard": "PARTIAL_DECLARED",
+    "note": "explicit part payment against a named invoice",
+    "payment_id": "HLD-PAY0030"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PARTIAL_SILENT",
+    "note": "indistinguishable from a payment for work not yet invoiced",
+    "payment_id": "HLD-PAY0031"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CONSOLIDATED_AMBIGUOUS",
+    "note": "HLD-INV0064+HLD-INV0065 and HLD-INV0066+HLD-INV0067 both total exactly this",
+    "payment_id": "HLD-PAY0032"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "AMBIGUOUS_TWIN",
+    "note": "HLD-INV0068 and HLD-INV0069 are indistinguishable on this evidence",
+    "payment_id": "HLD-PAY0033"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "WRONG_REF_CONFLICT",
+    "note": "memo cites HLD-INV0070 but the amount is HLD-INV0071's; evidence conflicts",
+    "payment_id": "HLD-PAY0034"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CURRENCY_MISMATCH",
+    "note": "invoice is USD, payment is EUR, and no FX rate source is configured",
+    "payment_id": "HLD-PAY0035"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "ALREADY_SETTLED",
+    "note": "invoice carries no outstanding balance; paying again is a loss",
+    "payment_id": "HLD-PAY0036"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "REVERSAL",
+    "note": "the written procedure does not define reversal handling",
+    "payment_id": "HLD-PAY0037"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "OVERPAYMENT",
+    "note": "the procedure does not define what happens to the residual credit",
+    "payment_id": "HLD-PAY0038"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PREDATED",
+    "note": "value date precedes the invoice issue date; the reference cannot be trusted",
+    "payment_id": "HLD-PAY0039"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "NO_CANDIDATE",
+    "note": "counterparty is not a known vendor and no invoice fits",
+    "payment_id": "HLD-PAY0040"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 538939,
+        "invoice_id": "HLD-INV0077"
+      }
+    ],
+    "hazard": "CLEAN_EXACT",
+    "note": "reference, vendor and amount all agree",
+    "payment_id": "HLD-PAY0041"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "DUPLICATE_PAYMENT",
+    "note": "bank_reference already ingested; re-applying would double-pay",
+    "payment_id": "HLD-PAY0042"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 1007225,
+        "invoice_id": "HLD-INV0078"
+      }
+    ],
+    "hazard": "NAME_NOISE",
+    "note": "amount is unique to one open invoice for this vendor",
+    "payment_id": "HLD-PAY0043"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 1525788,
+        "invoice_id": "HLD-INV0079"
+      }
+    ],
+    "hazard": "BANK_FEE",
+    "note": "memo names the invoice and explains the shortfall; apply cash received",
+    "payment_id": "HLD-PAY0044"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 3876895,
+        "invoice_id": "HLD-INV0080"
+      }
+    ],
+    "hazard": "ROUNDING_FX",
+    "note": "sub-cent rounding on the sending side; within tolerance",
+    "payment_id": "HLD-PAY0045"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 2584736,
+        "invoice_id": "HLD-INV0081"
+      }
+    ],
+    "hazard": "TRANSPOSED_REF",
+    "note": "cited reference does not exist; amount and vendor identify one invoice",
+    "payment_id": "HLD-PAY0046"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4504138,
+        "invoice_id": "HLD-INV0082"
+      }
+    ],
+    "hazard": "CREDIT_NOTE",
+    "note": "payment equals invoice less the recorded credit note",
+    "payment_id": "HLD-PAY0047"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 363590,
+        "invoice_id": "HLD-INV0083"
+      },
+      {
+        "amount_cents": 120516,
+        "invoice_id": "HLD-INV0084"
+      },
+      {
+        "amount_cents": 692724,
+        "invoice_id": "HLD-INV0085"
+      }
+    ],
+    "hazard": "CONSOLIDATED_REF",
+    "note": "memo enumerates every invoice and the total reconciles exactly",
+    "payment_id": "HLD-PAY0048"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 448951,
+        "invoice_id": "HLD-INV0086"
+      }
+    ],
+    "hazard": "CROSS_VENDOR_TRAP",
+    "note": "amount also matches HLD-INV0087; counterparty resolves the tie",
+    "payment_id": "HLD-PAY0049"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 223842,
+        "invoice_id": "HLD-INV0088"
+      }
+    ],
+    "hazard": "PARTIAL_DECLARED",
+    "note": "explicit part payment against a named invoice",
+    "payment_id": "HLD-PAY0050"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PARTIAL_SILENT",
+    "note": "indistinguishable from a payment for work not yet invoiced",
+    "payment_id": "HLD-PAY0051"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CONSOLIDATED_AMBIGUOUS",
+    "note": "HLD-INV0090+HLD-INV0091 and HLD-INV0092+HLD-INV0093 both total exactly this",
+    "payment_id": "HLD-PAY0052"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "AMBIGUOUS_TWIN",
+    "note": "HLD-INV0094 and HLD-INV0095 are indistinguishable on this evidence",
+    "payment_id": "HLD-PAY0053"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "WRONG_REF_CONFLICT",
+    "note": "memo cites HLD-INV0096 but the amount is HLD-INV0097's; evidence conflicts",
+    "payment_id": "HLD-PAY0054"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CURRENCY_MISMATCH",
+    "note": "invoice is USD, payment is EUR, and no FX rate source is configured",
+    "payment_id": "HLD-PAY0055"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "ALREADY_SETTLED",
+    "note": "invoice carries no outstanding balance; paying again is a loss",
+    "payment_id": "HLD-PAY0056"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "REVERSAL",
+    "note": "the written procedure does not define reversal handling",
+    "payment_id": "HLD-PAY0057"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "OVERPAYMENT",
+    "note": "the procedure does not define what happens to the residual credit",
+    "payment_id": "HLD-PAY0058"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PREDATED",
+    "note": "value date precedes the invoice issue date; the reference cannot be trusted",
+    "payment_id": "HLD-PAY0059"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "NO_CANDIDATE",
+    "note": "counterparty is not a known vendor and no invoice fits",
+    "payment_id": "HLD-PAY0060"
+  }
+]

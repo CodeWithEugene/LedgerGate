@@ -1,0 +1,12 @@
+{
+  "invoices": 102,
+  "name": "holdout",
+  "payments": 60,
+  "seed": 20260831,
+  "sha256": {
+    "invoices.json": "ea9d73843dad0d1634594dd8a97f039866555c7e34e66e6bfd9dd547e2abd22d",
+    "opening_ledger.json": "c9b01a7792c21491d262cad5c02466af46388abaec29176b60c957d8c1f257ac",
+    "payments.json": "1d208ad9058f08094e0900aa0960482d70d819227a9a2d094e79f5f3a91a0fc2",
+    "truth.json": "c65e6536e2a1f09ead06c45d398f1447ee9980855e0d4fbc27076a322973648d"
+  }
+}

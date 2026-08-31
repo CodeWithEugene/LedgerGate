@@ -1,0 +1,581 @@
+[
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 218697,
+        "invoice_id": "DEV-INV0025"
+      }
+    ],
+    "hazard": "CLEAN_EXACT",
+    "note": "reference, vendor and amount all agree",
+    "payment_id": "DEV-PAY0001"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "DUPLICATE_PAYMENT",
+    "note": "bank_reference already ingested; re-applying would double-pay",
+    "payment_id": "DEV-PAY0002"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 163122,
+        "invoice_id": "DEV-INV0026"
+      }
+    ],
+    "hazard": "NAME_NOISE",
+    "note": "amount is unique to one open invoice for this vendor",
+    "payment_id": "DEV-PAY0003"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 3826286,
+        "invoice_id": "DEV-INV0027"
+      }
+    ],
+    "hazard": "BANK_FEE",
+    "note": "memo names the invoice and explains the shortfall; apply cash received",
+    "payment_id": "DEV-PAY0004"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 955431,
+        "invoice_id": "DEV-INV0028"
+      }
+    ],
+    "hazard": "ROUNDING_FX",
+    "note": "sub-cent rounding on the sending side; within tolerance",
+    "payment_id": "DEV-PAY0005"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4685133,
+        "invoice_id": "DEV-INV0029"
+      }
+    ],
+    "hazard": "TRANSPOSED_REF",
+    "note": "cited reference does not exist; amount and vendor identify one invoice",
+    "payment_id": "DEV-PAY0006"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4305481,
+        "invoice_id": "DEV-INV0030"
+      }
+    ],
+    "hazard": "CREDIT_NOTE",
+    "note": "payment equals invoice less the recorded credit note",
+    "payment_id": "DEV-PAY0007"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 269574,
+        "invoice_id": "DEV-INV0031"
+      },
+      {
+        "amount_cents": 517172,
+        "invoice_id": "DEV-INV0032"
+      },
+      {
+        "amount_cents": 471451,
+        "invoice_id": "DEV-INV0033"
+      }
+    ],
+    "hazard": "CONSOLIDATED_REF",
+    "note": "memo enumerates every invoice and the total reconciles exactly",
+    "payment_id": "DEV-PAY0008"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 436250,
+        "invoice_id": "DEV-INV0034"
+      }
+    ],
+    "hazard": "CROSS_VENDOR_TRAP",
+    "note": "amount also matches DEV-INV0035; counterparty resolves the tie",
+    "payment_id": "DEV-PAY0009"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 793944,
+        "invoice_id": "DEV-INV0036"
+      }
+    ],
+    "hazard": "PARTIAL_DECLARED",
+    "note": "explicit part payment against a named invoice",
+    "payment_id": "DEV-PAY0010"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PARTIAL_SILENT",
+    "note": "indistinguishable from a payment for work not yet invoiced",
+    "payment_id": "DEV-PAY0011"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CONSOLIDATED_AMBIGUOUS",
+    "note": "DEV-INV0038+DEV-INV0039 and DEV-INV0040+DEV-INV0041 both total exactly this",
+    "payment_id": "DEV-PAY0012"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "AMBIGUOUS_TWIN",
+    "note": "DEV-INV0042 and DEV-INV0043 are indistinguishable on this evidence",
+    "payment_id": "DEV-PAY0013"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "WRONG_REF_CONFLICT",
+    "note": "memo cites DEV-INV0044 but the amount is DEV-INV0045's; evidence conflicts",
+    "payment_id": "DEV-PAY0014"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CURRENCY_MISMATCH",
+    "note": "invoice is USD, payment is EUR, and no FX rate source is configured",
+    "payment_id": "DEV-PAY0015"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "ALREADY_SETTLED",
+    "note": "invoice carries no outstanding balance; paying again is a loss",
+    "payment_id": "DEV-PAY0016"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "REVERSAL",
+    "note": "the written procedure does not define reversal handling",
+    "payment_id": "DEV-PAY0017"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "OVERPAYMENT",
+    "note": "the procedure does not define what happens to the residual credit",
+    "payment_id": "DEV-PAY0018"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PREDATED",
+    "note": "value date precedes the invoice issue date; the reference cannot be trusted",
+    "payment_id": "DEV-PAY0019"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "NO_CANDIDATE",
+    "note": "counterparty is not a known vendor and no invoice fits",
+    "payment_id": "DEV-PAY0020"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4762743,
+        "invoice_id": "DEV-INV0051"
+      }
+    ],
+    "hazard": "CLEAN_EXACT",
+    "note": "reference, vendor and amount all agree",
+    "payment_id": "DEV-PAY0021"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "DUPLICATE_PAYMENT",
+    "note": "bank_reference already ingested; re-applying would double-pay",
+    "payment_id": "DEV-PAY0022"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 1822013,
+        "invoice_id": "DEV-INV0052"
+      }
+    ],
+    "hazard": "NAME_NOISE",
+    "note": "amount is unique to one open invoice for this vendor",
+    "payment_id": "DEV-PAY0023"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 525414,
+        "invoice_id": "DEV-INV0053"
+      }
+    ],
+    "hazard": "BANK_FEE",
+    "note": "memo names the invoice and explains the shortfall; apply cash received",
+    "payment_id": "DEV-PAY0024"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4227272,
+        "invoice_id": "DEV-INV0054"
+      }
+    ],
+    "hazard": "ROUNDING_FX",
+    "note": "sub-cent rounding on the sending side; within tolerance",
+    "payment_id": "DEV-PAY0025"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 2843306,
+        "invoice_id": "DEV-INV0055"
+      }
+    ],
+    "hazard": "TRANSPOSED_REF",
+    "note": "cited reference does not exist; amount and vendor identify one invoice",
+    "payment_id": "DEV-PAY0026"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 3655986,
+        "invoice_id": "DEV-INV0056"
+      }
+    ],
+    "hazard": "CREDIT_NOTE",
+    "note": "payment equals invoice less the recorded credit note",
+    "payment_id": "DEV-PAY0027"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 642947,
+        "invoice_id": "DEV-INV0057"
+      },
+      {
+        "amount_cents": 870005,
+        "invoice_id": "DEV-INV0058"
+      },
+      {
+        "amount_cents": 265128,
+        "invoice_id": "DEV-INV0059"
+      }
+    ],
+    "hazard": "CONSOLIDATED_REF",
+    "note": "memo enumerates every invoice and the total reconciles exactly",
+    "payment_id": "DEV-PAY0028"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 1231590,
+        "invoice_id": "DEV-INV0060"
+      }
+    ],
+    "hazard": "CROSS_VENDOR_TRAP",
+    "note": "amount also matches DEV-INV0061; counterparty resolves the tie",
+    "payment_id": "DEV-PAY0029"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 641090,
+        "invoice_id": "DEV-INV0062"
+      }
+    ],
+    "hazard": "PARTIAL_DECLARED",
+    "note": "explicit part payment against a named invoice",
+    "payment_id": "DEV-PAY0030"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PARTIAL_SILENT",
+    "note": "indistinguishable from a payment for work not yet invoiced",
+    "payment_id": "DEV-PAY0031"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CONSOLIDATED_AMBIGUOUS",
+    "note": "DEV-INV0064+DEV-INV0065 and DEV-INV0066+DEV-INV0067 both total exactly this",
+    "payment_id": "DEV-PAY0032"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "AMBIGUOUS_TWIN",
+    "note": "DEV-INV0068 and DEV-INV0069 are indistinguishable on this evidence",
+    "payment_id": "DEV-PAY0033"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "WRONG_REF_CONFLICT",
+    "note": "memo cites DEV-INV0070 but the amount is DEV-INV0071's; evidence conflicts",
+    "payment_id": "DEV-PAY0034"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CURRENCY_MISMATCH",
+    "note": "invoice is USD, payment is EUR, and no FX rate source is configured",
+    "payment_id": "DEV-PAY0035"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "ALREADY_SETTLED",
+    "note": "invoice carries no outstanding balance; paying again is a loss",
+    "payment_id": "DEV-PAY0036"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "REVERSAL",
+    "note": "the written procedure does not define reversal handling",
+    "payment_id": "DEV-PAY0037"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "OVERPAYMENT",
+    "note": "the procedure does not define what happens to the residual credit",
+    "payment_id": "DEV-PAY0038"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PREDATED",
+    "note": "value date precedes the invoice issue date; the reference cannot be trusted",
+    "payment_id": "DEV-PAY0039"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "NO_CANDIDATE",
+    "note": "counterparty is not a known vendor and no invoice fits",
+    "payment_id": "DEV-PAY0040"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 1753672,
+        "invoice_id": "DEV-INV0077"
+      }
+    ],
+    "hazard": "CLEAN_EXACT",
+    "note": "reference, vendor and amount all agree",
+    "payment_id": "DEV-PAY0041"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "DUPLICATE_PAYMENT",
+    "note": "bank_reference already ingested; re-applying would double-pay",
+    "payment_id": "DEV-PAY0042"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 3183893,
+        "invoice_id": "DEV-INV0078"
+      }
+    ],
+    "hazard": "NAME_NOISE",
+    "note": "amount is unique to one open invoice for this vendor",
+    "payment_id": "DEV-PAY0043"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 85032,
+        "invoice_id": "DEV-INV0079"
+      }
+    ],
+    "hazard": "BANK_FEE",
+    "note": "memo names the invoice and explains the shortfall; apply cash received",
+    "payment_id": "DEV-PAY0044"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4024614,
+        "invoice_id": "DEV-INV0080"
+      }
+    ],
+    "hazard": "ROUNDING_FX",
+    "note": "sub-cent rounding on the sending side; within tolerance",
+    "payment_id": "DEV-PAY0045"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 4388993,
+        "invoice_id": "DEV-INV0081"
+      }
+    ],
+    "hazard": "TRANSPOSED_REF",
+    "note": "cited reference does not exist; amount and vendor identify one invoice",
+    "payment_id": "DEV-PAY0046"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 3233409,
+        "invoice_id": "DEV-INV0082"
+      }
+    ],
+    "hazard": "CREDIT_NOTE",
+    "note": "payment equals invoice less the recorded credit note",
+    "payment_id": "DEV-PAY0047"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 872800,
+        "invoice_id": "DEV-INV0083"
+      },
+      {
+        "amount_cents": 333755,
+        "invoice_id": "DEV-INV0084"
+      },
+      {
+        "amount_cents": 259187,
+        "invoice_id": "DEV-INV0085"
+      }
+    ],
+    "hazard": "CONSOLIDATED_REF",
+    "note": "memo enumerates every invoice and the total reconciles exactly",
+    "payment_id": "DEV-PAY0048"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 866472,
+        "invoice_id": "DEV-INV0086"
+      }
+    ],
+    "hazard": "CROSS_VENDOR_TRAP",
+    "note": "amount also matches DEV-INV0087; counterparty resolves the tie",
+    "payment_id": "DEV-PAY0049"
+  },
+  {
+    "expected_action": "MATCH",
+    "expected_allocations": [
+      {
+        "amount_cents": 552732,
+        "invoice_id": "DEV-INV0088"
+      }
+    ],
+    "hazard": "PARTIAL_DECLARED",
+    "note": "explicit part payment against a named invoice",
+    "payment_id": "DEV-PAY0050"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PARTIAL_SILENT",
+    "note": "indistinguishable from a payment for work not yet invoiced",
+    "payment_id": "DEV-PAY0051"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CONSOLIDATED_AMBIGUOUS",
+    "note": "DEV-INV0090+DEV-INV0091 and DEV-INV0092+DEV-INV0093 both total exactly this",
+    "payment_id": "DEV-PAY0052"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "AMBIGUOUS_TWIN",
+    "note": "DEV-INV0094 and DEV-INV0095 are indistinguishable on this evidence",
+    "payment_id": "DEV-PAY0053"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "WRONG_REF_CONFLICT",
+    "note": "memo cites DEV-INV0096 but the amount is DEV-INV0097's; evidence conflicts",
+    "payment_id": "DEV-PAY0054"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "CURRENCY_MISMATCH",
+    "note": "invoice is USD, payment is EUR, and no FX rate source is configured",
+    "payment_id": "DEV-PAY0055"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "ALREADY_SETTLED",
+    "note": "invoice carries no outstanding balance; paying again is a loss",
+    "payment_id": "DEV-PAY0056"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "REVERSAL",
+    "note": "the written procedure does not define reversal handling",
+    "payment_id": "DEV-PAY0057"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "OVERPAYMENT",
+    "note": "the procedure does not define what happens to the residual credit",
+    "payment_id": "DEV-PAY0058"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "PREDATED",
+    "note": "value date precedes the invoice issue date; the reference cannot be trusted",
+    "payment_id": "DEV-PAY0059"
+  },
+  {
+    "expected_action": "ABSTAIN",
+    "expected_allocations": [],
+    "hazard": "NO_CANDIDATE",
+    "note": "counterparty is not a known vendor and no invoice fits",
+    "payment_id": "DEV-PAY0060"
+  }
+]

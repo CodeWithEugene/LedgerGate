@@ -1,0 +1,12 @@
+{
+  "invoices": 102,
+  "name": "dev",
+  "payments": 60,
+  "seed": 20260828,
+  "sha256": {
+    "invoices.json": "c52ef13dab7f90e8d12a0a210108505b7e6e1a45d928512fb0b2f9bd1c70b606",
+    "opening_ledger.json": "3e921a34c328a3ae6a59490a0003a4574276ebfd7e3e9066ed9fc017eb9196d3",
+    "payments.json": "1bf261b0f0adbb3aee68c0c3b33a0b28ffdc76f4fc83cd0c74dbfce7b2208362",
+    "truth.json": "49119fe90b2d79f076e19a8e032efa7769fe20456d01b5c2e85c76f1d084d2ff"
+  }
+}

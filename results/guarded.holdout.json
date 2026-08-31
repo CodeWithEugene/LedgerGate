@@ -1,0 +1,240 @@
+{
+  "corpus": "holdout",
+  "corpus_seed": 20260831,
+  "cost": {
+    "llm_calls": 0,
+    "llm_input_tokens": 0,
+    "llm_output_tokens": 0,
+    "steps_used": 324,
+    "wall_seconds": 0.019
+  },
+  "cost_model": {
+    "CORRECT_ABSTAIN": 15,
+    "CORRECT_MATCH": 100,
+    "OVER_ESCALATION": -30,
+    "UNSAFE_MATCH": -2500,
+    "WRONG_AMOUNT": -400,
+    "WRONG_INVOICE": -2500
+  },
+  "counts": {
+    "CORRECT_ABSTAIN": 33,
+    "CORRECT_MATCH": 27,
+    "OVER_ESCALATION": 0,
+    "UNSAFE_MATCH": 0,
+    "WRONG_AMOUNT": 0,
+    "WRONG_INVOICE": 0
+  },
+  "failures": [],
+  "headline": {
+    "abstain_precision": 1.0,
+    "abstain_recall": 1.0,
+    "automation_precision": 1.0,
+    "coverage": 0.45,
+    "exact_accuracy": 1.0,
+    "false_pay_count": 0,
+    "false_pay_rate": 0.0,
+    "net_value": 3195
+  },
+  "ledger_blocks": {},
+  "per_hazard": {
+    "ALREADY_SETTLED": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "AMBIGUOUS_TWIN": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "BANK_FEE": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "CLEAN_EXACT": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "CONSOLIDATED_AMBIGUOUS": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "CONSOLIDATED_REF": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "CREDIT_NOTE": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "CROSS_VENDOR_TRAP": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "CURRENCY_MISMATCH": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "DUPLICATE_PAYMENT": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "NAME_NOISE": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "NO_CANDIDATE": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "OVERPAYMENT": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "PARTIAL_DECLARED": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "PARTIAL_SILENT": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "PREDATED": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "REVERSAL": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "ROUNDING_FX": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "TRANSPOSED_REF": {
+      "CORRECT_ABSTAIN": 0,
+      "CORRECT_MATCH": 3,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    },
+    "WRONG_REF_CONFLICT": {
+      "CORRECT_ABSTAIN": 3,
+      "CORRECT_MATCH": 0,
+      "OVER_ESCALATION": 0,
+      "UNSAFE_MATCH": 0,
+      "WRONG_AMOUNT": 0,
+      "WRONG_INVOICE": 0
+    }
+  },
+  "policy": "guarded",
+  "policy_errors": 0,
+  "policy_stats": {
+    "veto_codes": {
+      "CURRENCY_MISMATCH": 3,
+      "PREDATED_RECEIPT": 3
+    },
+    "vetoes": 6
+  },
+  "queued_for_approval": 9,
+  "sensitivity": [
+    {
+      "false_pay_penalty": -250,
+      "net_value": 3195
+    },
+    {
+      "false_pay_penalty": -600,
+      "net_value": 3195
+    },
+    {
+      "false_pay_penalty": -1200,
+      "net_value": 3195
+    },
+    {
+      "false_pay_penalty": -2500,
+      "net_value": 3195
+    },
+    {
+      "false_pay_penalty": -5000,
+      "net_value": 3195
+    },
+    {
+      "false_pay_penalty": -12000,
+      "net_value": 3195
+    }
+  ],
+  "total_payments": 60,
+  "trajectory": "traces/guarded.holdout.jsonl",
+  "verifier_sha256": "7c679529d87c609134d5a4894490f1c382bea5453f5d75aa327abdd0ed31b5c7"
+}

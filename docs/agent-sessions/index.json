@@ -1,0 +1,16 @@
+{
+  "sessions": [
+    {
+      "bytes": 43503,
+      "conversation_turns": 12,
+      "file": "225a8580-7fa2-4154-883b-8a3077e391c4.jsonl",
+      "lines": 13
+    },
+    {
+      "bytes": 17749,
+      "conversation_turns": 14,
+      "file": "4e734973-9af0-4244-b133-711238a6f105.jsonl",
+      "lines": 15
+    }
+  ]
+}
