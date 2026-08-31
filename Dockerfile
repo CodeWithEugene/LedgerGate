@@ -32,7 +32,8 @@ COPY requirements-dev.txt ./
 RUN pip install --no-cache-dir --upgrade pip==26.2 \
  && pip install --no-cache-dir -r requirements-dev.txt
 
-COPY pyproject.toml Makefile README.md LICENSE Dockerfile ./
+COPY pyproject.toml Makefile Dockerfile ./
+COPY README.md CONTRIBUTING.md SECURITY.md LICENSE ./
 COPY src/ ./src/
 COPY tests/ ./tests/
 COPY data/ ./data/

@@ -588,7 +588,57 @@ codebase. It is also, for a reviewer, most of the interface.
 
 ---
 
-## 17. What I know is still wrong
+## 17. Iteration: writing the security policy caught two false claims in it
+
+Adding `CONTRIBUTING.md` and `SECURITY.md`. Both are ordinarily boilerplate;
+`SECURITY.md` is not boilerplate for this repository, because the subject of
+the project *is* a safety control, so "what counts as a vulnerability" has real
+answers — a proposal the gate should veto and does not, the gate altering a
+decision instead of vetoing it, a posting released without a recorded human.
+
+**Two claims I wrote were false, and I only found them by going to check.**
+
+The first: I wrote that `safe_compute` "does not call `eval`". It does —
+`eval(compile(tree, "<compute>", "eval"), {"__builtins__": {}}, {})`, on line
+168 of `tools.py`. The safety is real and comes from the AST allowlist that
+runs first, which permits arithmetic, comparison and literal nodes and no
+`Name`, `Call`, `Attribute` or `Subscript`, so an expression cannot refer to
+anything at all. But a security document that says "no `eval`" above a file
+containing `eval` is worse than one that says nothing: the reader greps, finds
+it, and correctly stops believing the rest of the page. It now has its own
+section stating the call explicitly and explaining what the guarantee actually
+rests on.
+
+The second was smaller and the same shape: I named `ANTHROPIC_API_KEY` as the
+only environment variable the client reads. It reads three.
+
+**A guarantee that exists by deletion is not enforced.** `SECURITY.md` promises
+the `User-Agent` cannot be overridden — the commitment §9 is about. That was
+true because I deleted the override, and restoring it is a one-line diff no
+test would have caught. Now asserted:
+`test_the_api_client_cannot_be_made_to_misrepresent_itself` parses the client
+and fails if it consults any environment variable beyond the endpoint and the
+credential. Verified by reintroducing the exact historical override, which the
+test names.
+
+**Both new documents were placed inside the integrity machinery, not beside
+it.** The scanners for documented commands, section references and test counts
+were defined over `docs/*.md` plus the README, so a root-level file would have
+been silently exempt — adding a document must not be a way to stop its claims
+being checked. They now run over `prose_documents()`, and a bogus `make`
+target, CLI subcommand or `§N` reference in either new file fails the suite by
+name.
+
+**Why this is here.** §16 concluded that prose is the untested surface of a
+codebase. The first thing I did afterwards was write two pages of prose and put
+two false statements in them. The lesson is not that I was careless — it is
+that the interval between believing something about your own code and its being
+false is shorter than the interval between writing it down and someone reading
+it.
+
+---
+
+## 18. What I know is still wrong
 
 - **The holdout is a reseed, not a distribution shift.** It differs in
   identifiers, names, amounts and dates, but it is drawn from the same

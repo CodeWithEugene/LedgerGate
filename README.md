@@ -306,7 +306,7 @@ directly. Full account in [`docs/CHANGELOG.md` §5](docs/CHANGELOG.md).
 | 3 | `make trace-sample` | one full agent trajectory as prose — tools, evidence, retries, gate verdict |
 | 2 | `make approve` | the human checkpoint: high-value postings queue and the system cannot release its own queue |
 | 4 | [`docs/CHANGELOG.md`](docs/CHANGELOG.md) §5, §8, §9 | the benchmark bug, the change that mattered most, the experiment I removed |
-| 3 | [`docs/CHANGELOG.md`](docs/CHANGELOG.md) §12–§16 | five places where every number was right and the sentence beside it was wrong, ending with the tests that now check the prose |
+| 3 | [`docs/CHANGELOG.md`](docs/CHANGELOG.md) §12–§17 | six places where every number was right and the sentence beside it was wrong — ending with the tests that now check the prose, and the two false claims I then wrote anyway |
 | 5 | [`docs/PROBLEM.md`](docs/PROBLEM.md) | the ambiguities in the domain and how each was resolved |
 | 2 | `tests/test_safety.py` | soundness and sufficiency, stated as properties |
 
@@ -382,7 +382,13 @@ involved — the runtime agent that is the object of study, and the coding agent
 that helped build the harness — and records where the coding agent was wrong.
 Redacted transcripts are in `docs/agent-sessions/`.
 
-MIT licensed.
+MIT licensed. [`SECURITY.md`](SECURITY.md) states the threat model, what counts
+as a vulnerability in a repository whose subject *is* a safety control, and what
+is deliberately unsafe — including the one real-world threat in this workflow
+that LedgerGate does not address at all. [`CONTRIBUTING.md`](CONTRIBUTING.md)
+records the five invariants a change has to preserve, and names the two
+contributions I would value most: a hazard class I failed to imagine, and a
+counterexample to either of the gate's two properties.
 
 ---
 

@@ -32,6 +32,22 @@ SECRET_PATTERNS = [
 SKIP_DIRS = {".git", ".venv", "__pycache__", ".pytest_cache"}
 
 
+def prose_documents() -> list[Path]:
+    """Every document a reviewer reads, wherever in the tree it lives.
+
+    The integrity checks below all scan "the documentation", and the obvious
+    spelling of that is `docs/*.md`. But `README.md`, `CONTRIBUTING.md` and
+    `SECURITY.md` sit at the root by convention, so a definition based on the
+    directory would silently exempt exactly the files a reviewer opens first.
+    Adding a document must not be a way to stop its claims being checked.
+    """
+    root = [
+        REPO_ROOT / name
+        for name in ("README.md", "CONTRIBUTING.md", "SECURITY.md")
+    ]
+    return [p for p in root if p.exists()] + sorted((REPO_ROOT / "docs").glob("*.md"))
+
+
 def tracked_files() -> list[Path]:
     """Prefer git's view; fall back to a walk where git is unavailable.
 
@@ -83,6 +99,9 @@ def test_exported_agent_sessions_are_redacted():
     "relative",
     [
         "README.md",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
+        "LICENSE",
         "Makefile",
         "Dockerfile",
         "pyproject.toml",
@@ -146,7 +165,7 @@ def test_every_make_target_the_docs_promise_actually_exists():
     # on their own line in a fenced block. Prose like "make proposers smarter"
     # is not a promise.
     promised: dict[str, set[str]] = {}
-    for doc in [REPO_ROOT / "README.md", *sorted((REPO_ROOT / "docs").glob("*.md"))]:
+    for doc in prose_documents():
         for target in _documented_commands(doc, r"make ([a-z][a-z0-9-]*)"):
             promised.setdefault(target, set()).add(doc.name)
 
@@ -166,7 +185,7 @@ def test_every_cli_subcommand_the_docs_promise_actually_exists():
     defined = set(actions[0].choices)
 
     promised: dict[str, set[str]] = {}
-    for doc in [REPO_ROOT / "README.md", *sorted((REPO_ROOT / "docs").glob("*.md"))]:
+    for doc in prose_documents():
         for cmd in _documented_commands(
             doc, r"(?:\S*python\S*\s+-m\s+)?ledgergate(?:\.cli)?\s+([a-z][a-z0-9-]*)"
         ):
@@ -211,6 +230,49 @@ def test_every_tool_the_agent_is_offered_is_actually_exercised():
     )
 
 
+def test_the_api_client_cannot_be_made_to_misrepresent_itself():
+    """`SECURITY.md` promises the User-Agent is fixed. One line could undo that.
+
+    This is the repository's only real integrity commitment about its own
+    conduct, and the reason the model arm is unpublished: the endpoint
+    available to me rejects clients that do not claim to be first-party
+    tooling, an earlier version of this client obliged, and the results were
+    discarded (`docs/CHANGELOG.md` §9). The override was deleted rather than
+    left behind a flag, because a flag is an invitation.
+
+    Deleting something is not a durable guarantee -- restoring it is a
+    one-line diff that no other test would notice. So the absence is asserted:
+    the header is a module constant, and the only environment variables the
+    client consults are the endpoint and the credential.
+    """
+    import ast as ast_module
+
+    from ledgergate.llm import client as client_module
+
+    assert client_module.USER_AGENT.startswith("ledgergate/"), (
+        f"the client identifies itself as {client_module.USER_AGENT!r}, which does "
+        "not name this project"
+    )
+
+    source = Path(client_module.__file__).read_text(encoding="utf-8")
+    consulted = {
+        node.args[0].value
+        for node in ast_module.walk(ast_module.parse(source))
+        if isinstance(node, ast_module.Call)
+        and isinstance(node.func, ast_module.Attribute)
+        and node.func.attr in {"get", "getenv"}
+        and node.args
+        and isinstance(node.args[0], ast_module.Constant)
+        and isinstance(node.args[0].value, str)
+        and node.args[0].value.isupper()
+    }
+    allowed = {"ANTHROPIC_BASE_URL", "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_API_KEY"}
+    assert consulted <= allowed, (
+        f"the client reads unexpected environment variables {sorted(consulted - allowed)}; "
+        "the User-Agent in particular must not be configurable (see SECURITY.md)"
+    )
+
+
 def test_the_test_count_the_docs_quote_is_the_real_one():
     """`docs/REPRODUCTION.md` tells a reviewer what output to expect.
 
@@ -242,7 +304,7 @@ def test_the_test_count_the_docs_quote_is_the_real_one():
     # `tests/test_llm_policy.py`") or about the suite as a whole. Both drift.
     claim = re.compile(r"(\d+) tests?\b(?![ a-z]*(?:collected|pass))")
     wrong = []
-    for source in [REPO_ROOT / "README.md", *sorted((REPO_ROOT / "docs").glob("*.md"))]:
+    for source in prose_documents():
         text = source.read_text(encoding="utf-8")
         for m in claim.finditer(text):
             quoted = int(m.group(1))
@@ -270,8 +332,7 @@ def test_every_section_reference_between_documents_resolves():
     it sends a reviewer checking a claim to a passage about a different bug,
     and the natural conclusion is that the claim was made up.
     """
-    docs = {p.name: p for p in (REPO_ROOT / "docs").glob("*.md")}
-    docs["README.md"] = REPO_ROOT / "README.md"
+    docs = {p.name: p for p in prose_documents()}
 
     def sections(name):
         text = docs[name].read_text(encoding="utf-8")
@@ -282,7 +343,7 @@ def test_every_section_reference_between_documents_resolves():
     # a bare "see §6 below" binds to the document it appears in.
     token = re.compile(r"([A-Za-z_]+\.md)|§(\d+)")
     broken = []
-    for source in [REPO_ROOT / "README.md", *sorted((REPO_ROOT / "docs").glob("*.md"))]:
+    for source in prose_documents():
         for line in source.read_text(encoding="utf-8").splitlines():
             target = source.name
             for named, number in token.findall(line):
