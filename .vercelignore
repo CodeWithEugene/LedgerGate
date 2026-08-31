@@ -1,7 +1,8 @@
+# Used by the Python engine project (ledgergate-api). Do not ignore `web/` —
+# the Next.js project (ledgergate) is in the same repo and Git deploys need it.
 .venv
 .railway
 .vercel
-web
 tests
 docs
 cassettes
