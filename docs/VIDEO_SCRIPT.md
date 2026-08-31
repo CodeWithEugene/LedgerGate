@@ -11,6 +11,16 @@ Every command below is real, runs offline, and finishes in seconds.
 Check no terminal tab, editor tab, shell prompt, or `env` output shows a
 credential. Recommend recording in a fresh shell.
 
+**Driving it:** `make demo` runs every command below in order, one keypress
+apart, clearing the screen before each so the output lands at the top of a
+clean frame. Every command finishes in well under a second, so typing them live
+means the result appears and scrolls before you have said anything about it —
+the pause is there to let you narrate, not to wait on the machine. Beats 1–3
+print about 50 lines each; size the terminal so they fit in one frame.
+
+`DEMO_PAUSE=0 make demo` runs the whole sequence without pauses, for checking
+it end to end before you record.
+
 ---
 
 ## 0:00–0:45 — The problem
